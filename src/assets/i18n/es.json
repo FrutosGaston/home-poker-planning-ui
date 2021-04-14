@@ -1,0 +1,10 @@
+{
+  "language.select": "Seleccionar lenguage",
+  "language.spanish": "Español",
+  "language.english": "Ingles",
+  "planning.home.name": "Nombre",
+  "planning.home.name.mandatory": "Este campo es obligatorio.",
+  "planning.home.name.min": "El nombre debe tener al menos 3 caracteres.",
+  "planning.home.name.max": "El nombre no puede tener mas de 20 caracteres.",
+  "planning.home.submit": "Entrar"
+}

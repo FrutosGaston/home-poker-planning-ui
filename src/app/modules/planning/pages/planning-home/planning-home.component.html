@@ -1,0 +1,16 @@
+<div class="example-container">
+  <div class="form-container">
+    <form [formGroup]="guestForm" (submit)="submit()">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>{{ 'planning.home.name' | translate }}</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="guestForm.controls.name.touched && guestForm.controls.name.invalid">
+          <span *ngIf="guestForm.controls.name.errors.required">{{ 'planning.home.name.mandatory' | translate }}</span>
+          <span *ngIf="guestForm.controls.name.errors.minlength">{{ 'planning.home.name.min' | translate }}</span>
+          <span *ngIf="guestForm.controls.name.errors.minlength">{{ 'planning.home.name.max' | translate }}</span>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">{{ 'planning.home.submit' | translate }}</button>
+    </form>
+  </div>
+</div>

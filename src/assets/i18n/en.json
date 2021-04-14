@@ -1,0 +1,10 @@
+{
+  "language.select": "Select language",
+  "language.spanish": "Spanish",
+  "language.english": "English",
+  "planning.home.name": "Name",
+  "planning.home.name.mandatory": "This field is mandatory.",
+  "planning.home.name.min": "Name must be at least 3 characters long.",
+  "planning.home.name.max": "Name cannot have more than 20 characters.",
+  "planning.home.submit": "Enter"
+}
