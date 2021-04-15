@@ -6,5 +6,8 @@
   "planning.home.name.mandatory": "Este campo es obligatorio.",
   "planning.home.name.min": "El nombre debe tener al menos 3 caracteres.",
   "planning.home.name.max": "El nombre no puede tener mas de 20 caracteres.",
+  "planning.home.roomId": "ID de la Sala",
+  "planning.home.roomId.mandatory": "Este campo es obligatorio.",
+  "planning.home.roomId.min": "El ID de sala debe ser un numero positivo.",
   "planning.home.submit": "Entrar"
 }

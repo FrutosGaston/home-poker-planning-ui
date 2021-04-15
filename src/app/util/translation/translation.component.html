@@ -1,7 +1,10 @@
-<div class="container">
-  <h1>{{ 'language.select' | translate }}</h1>
-  <div class="button-container">
-    <button [ngClass]="{'active': activeLang == 'es'}" (click)="changeLanguage('es')">{{ 'language.spanish' | translate }}</button>
-    <button [ngClass]="{'active': activeLang == 'en'}" (click)="changeLanguage('en')">{{ 'language.english' | translate }}</button>
-  </div>
-</div>
+<ng-container>
+  <button mat-icon-button class="translate-icon" aria-label="Translate icon" [matMenuTriggerFor]="menu">
+    <mat-icon>translate</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [ngClass]="{'active': activeLang == 'es'}" (click)="changeLanguage('es')">{{ 'language.spanish' | translate }}</button>
+    <button mat-menu-item [ngClass]="{'active': activeLang == 'en'}" (click)="changeLanguage('en')">{{ 'language.english' | translate }}</button>
+  </mat-menu>
+</ng-container>

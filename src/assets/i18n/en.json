@@ -6,5 +6,8 @@
   "planning.home.name.mandatory": "This field is mandatory.",
   "planning.home.name.min": "Name must be at least 3 characters long.",
   "planning.home.name.max": "Name cannot have more than 20 characters.",
+  "planning.home.roomId": "Room ID",
+  "planning.home.roomId.mandatory": "This field is mandatory.",
+  "planning.home.roomId.min": "The id should be a positive number.",
   "planning.home.submit": "Enter"
 }

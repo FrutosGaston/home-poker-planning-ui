@@ -14,12 +14,17 @@ import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { TranslationComponent } from './util/translation/translation.component';
+import { GuestLoginComponent } from './modules/planning/components/guest-login/guest-login.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlanningHomeComponent,
-    TranslationComponent
+    TranslationComponent,
+    GuestLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +33,11 @@ import { TranslationComponent } from './util/translation/translation.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
     MatCheckboxModule,
+    ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
