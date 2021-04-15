@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {RoomService} from '../../../../services/room.service';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-guest-login',
@@ -11,7 +13,8 @@ export class GuestLoginComponent implements OnInit {
   guestForm: FormGroup;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private roomService: RoomService
   ) { }
 
   ngOnInit(): void {
@@ -25,7 +28,7 @@ export class GuestLoginComponent implements OnInit {
     if (!this.guestForm.valid) {
       return;
     }
-    console.log(this.guestForm.value);
+    this.roomService.addGuestUser(this.guestForm.value).subscribe(res => console.log(res), error => console.error(error));
   }
 
 }
