@@ -9,5 +9,8 @@
   "planning.home.roomId": "Room ID",
   "planning.home.roomId.mandatory": "This field is mandatory.",
   "planning.home.roomId.min": "The id should be a positive number.",
-  "planning.home.submit": "Enter"
+  "planning.home.submit": "Enter",
+  "planning.room.points.mandatory": "You must set an estimation",
+  "planning.room.points.label": "Estimation",
+  "planning.room.estimate": "Estimate"
 }

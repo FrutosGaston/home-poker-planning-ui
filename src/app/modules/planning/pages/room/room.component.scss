@@ -1,0 +1,32 @@
+.user-name {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 24px 12px;
+}
+
+.users-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.estimate-form, .user-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-card {
+  flex: 1 1 0px
+}
+
+.color-0 { color: #6666ff }
+.color-1 { color: #339933 }
+.color-2 { color: #ff9900 }
+.color-3 { color: #990000 }
+.color-4 { color: #003399 }
+.color-5 { color: #cc0099 }
+.color-6 { color: #33ccff }
+.color-7 { color: #666699 }
+.color-8 { color: #666633 }
+.color-9 { color: #006666 }
+

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RoomService} from '../../../../services/room.service';
-import {take} from 'rxjs/operators';
+import {GuestUserService} from '../../../../services/guest-user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-guest-login',
@@ -14,7 +14,8 @@ export class GuestLoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private roomService: RoomService
+    private roomService: GuestUserService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +29,8 @@ export class GuestLoginComponent implements OnInit {
     if (!this.guestForm.valid) {
       return;
     }
-    this.roomService.addGuestUser(this.guestForm.value).subscribe(res => console.log(res), error => console.error(error));
+    this.roomService.create(this.guestForm.value).subscribe(res => this.router.navigateByUrl('/room')
+      , error => console.error(error));
   }
 
 }

@@ -18,17 +18,27 @@ import { GuestLoginComponent } from './modules/planning/components/guest-login/g
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import { RoomComponent } from './modules/planning/pages/room/room.component';
+import {RouterModule, Routes} from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
+
+const routes: Routes = [
+  { path: '', component: PlanningHomeComponent },
+  { path: 'room', component: RoomComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     PlanningHomeComponent,
     TranslationComponent,
-    GuestLoginComponent
+    GuestLoginComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -37,6 +47,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatIconModule,
     MatMenuModule,
     MatCheckboxModule,
+    MatCardModule,
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({
@@ -49,6 +60,7 @@ import {MatMenuModule} from '@angular/material/menu';
       }
     })
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

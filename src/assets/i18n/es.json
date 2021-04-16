@@ -9,5 +9,8 @@
   "planning.home.roomId": "ID de la Sala",
   "planning.home.roomId.mandatory": "Este campo es obligatorio.",
   "planning.home.roomId.min": "El ID de sala debe ser un numero positivo.",
-  "planning.home.submit": "Entrar"
+  "planning.home.submit": "Entrar",
+  "planning.room.points.mandatory": "Debe ingresar una estimacion",
+  "planning.room.points.label": "Estimacion",
+  "planning.room.estimate": "Estimar"
 }

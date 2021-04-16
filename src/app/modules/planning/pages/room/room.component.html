@@ -1,0 +1,22 @@
+<div *ngIf="!loggedUser">
+  <div>YOU MUST BE LOGGED IN</div>
+</div>
+
+<div class="users-container" *ngIf="loggedUser">
+  <ng-container *ngFor="let user of usersInRoom; let i = index">
+    <mat-card class="user-card">
+      <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
+
+      <form class="estimate-form" *ngIf="user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
+          <input matInput formControlName="points" required>
+          <mat-error *ngIf="estimationForm.controls.points.touched && estimationForm.controls.points.invalid">
+            <span *ngIf="estimationForm.controls.points.errors.required">{{ 'planning.room.points.mandatory' | translate }}</span>
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">{{ 'planning.room.estimate' | translate }}</button>
+      </form>
+    </mat-card>
+  </ng-container>
+</div>
