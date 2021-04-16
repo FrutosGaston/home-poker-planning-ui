@@ -23,18 +23,17 @@ export class RoomComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.loggedUser = this.guestUserService.loggedGuestUser || this.fakeUser();
+    this.loggedUser = this.guestUserService.loggedGuestUser; // || this.fakeUser();
     if (!this.loggedUser) { return; }
     const currentRoom = this.loggedUser.roomId;
 
     const users$ = this.guestUserService.findByRoom(currentRoom);
-    users$.subscribe(guestUserList => this.usersInRoom = guestUserList);
     const round$ = this.roundService.getByRoom(currentRoom);
-    round$.subscribe(round => this.round = round);
 
     combineLatest([users$, round$]).subscribe(results => {
-      const round: RoundModel = results[1];
-      this.roundDone = round.done(results[0]);
+      this.usersInRoom = results[0];
+      this.round = results[1];
+      this.roundDone = this.round.done(this.usersInRoom);
     });
 
     this.estimationForm = this.formBuilder.group({
@@ -46,7 +45,11 @@ export class RoomComponent implements OnInit {
     if (!this.estimationForm.valid) {
       return;
     }
-    console.log(this.estimationForm.value.points);
+    const estimation = new EstimationModel();
+    estimation.guestUserId = this.loggedUser.id;
+    estimation.roundId = this.round.id;
+    estimation.name = this.estimationForm.value.points;
+    this.roundService.estimate(estimation).subscribe(_ => {});
   }
 
   private fakeUser(): GuestUserModel {
