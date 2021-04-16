@@ -1,3 +1,5 @@
+@import "src/styles.scss";
+
 .user-name {
   font-weight: bold;
   font-size: 20px;
@@ -16,7 +18,20 @@
 }
 
 .user-card {
-  flex: 1 1 0px
+  flex: 1 1 0px;
+  justify-content: space-between;
+}
+
+mat-icon {
+  @include md-icon-size(80px);
+}
+
+.pending-icon {
+  color: #404040;
+}
+
+.done-icon {
+  color: green;
 }
 
 .color-0 { color: #6666ff }

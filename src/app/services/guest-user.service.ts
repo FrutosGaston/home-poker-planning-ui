@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {GuestUserModel} from '../models/GuestUser.model';
 import {take, tap} from 'rxjs/operators';
+import {RoundModel} from '../models/Round.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import {take, tap} from 'rxjs/operators';
 export class GuestUserService {
 
   baseURL = 'http://localhost:8080/api/v1/guest-users/';
+  // tslint:disable-next-line:variable-name
   private _loggedGuestUser: GuestUserModel;
 
   constructor(private http: HttpClient) {}
@@ -25,8 +27,8 @@ export class GuestUserService {
       }));
   }
 
-  findByRoom(roomId: number): Observable<any> {
-    return this.http.get(`${this.baseURL}?roomId=${roomId}`)
+  findByRoom(roomId: number): Observable<GuestUserModel[]> {
+    return this.http.get<GuestUserModel[]>(`${this.baseURL}?roomId=${roomId}`)
       .pipe(take(1));
   }
 

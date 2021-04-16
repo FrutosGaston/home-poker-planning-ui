@@ -32,3 +32,10 @@ body {
 .mat-menu-item:hover {
   background: mat-color($accent, lighter) !important;
 }
+
+@mixin md-icon-size($size: 24px) {
+  font-size: $size !important;
+  height: $size !important;
+  width: $size !important;
+  line-height: $size !important;
+}
