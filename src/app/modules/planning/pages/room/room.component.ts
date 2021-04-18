@@ -23,7 +23,7 @@ export class RoomComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.loggedUser = this.guestUserService.loggedGuestUser; // || this.fakeUser();
+    this.loggedUser = this.guestUserService.loggedGuestUser || this.fakeUser();
     if (!this.loggedUser) { return; }
     const currentRoom = this.loggedUser.roomId;
 
@@ -56,7 +56,7 @@ export class RoomComponent implements OnInit {
     const fakeUser = new GuestUserModel();
     fakeUser.roomId = 1;
     fakeUser.name = 'Gaston';
-    fakeUser.id = 4;
+    fakeUser.id = 34;
     return fakeUser;
   }
 

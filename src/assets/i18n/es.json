@@ -12,5 +12,6 @@
   "planning.home.submit": "Entrar",
   "planning.room.points.mandatory": "Debe ingresar una estimacion",
   "planning.room.points.label": "Estimacion",
-  "planning.room.estimate": "Estimar"
+  "planning.room.estimate": "Estimar",
+  "planning.room.task.title": "Estimando la tarea: {{title}}"
 }

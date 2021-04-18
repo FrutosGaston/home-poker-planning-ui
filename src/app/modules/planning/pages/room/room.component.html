@@ -2,33 +2,40 @@
   <div>YOU MUST BE LOGGED IN</div>
 </div>
 
-<div class="users-container" *ngIf="loggedUser">
-  <ng-container *ngFor="let user of usersInRoom; let i = index">
-    <mat-card class="user-card">
-      <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
+<div *ngIf="loggedUser">
 
-      <ng-container *ngIf="roundDone">
-        <strong>{{getEstimation(user.id).name}}</strong>
+  <ng-container *ngIf="round">
+    <h2>{{'planning.room.task.title' | translate:{title: round.title} }}</h2>
+
+    <div class="users-container">
+      <ng-container *ngFor="let user of usersInRoom; let i = index">
+        <mat-card class="user-card">
+          <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
+
+          <ng-container *ngIf="roundDone">
+            <strong>{{getEstimation(user.id).name}}</strong>
+          </ng-container>
+
+          <ng-container *ngIf="!roundDone && !getEstimation(user.id) && !(user.id === loggedUser.id)">
+            <mat-icon class="pending-icon" inline="true">pending</mat-icon>
+          </ng-container>
+
+          <ng-container *ngIf="!roundDone && getEstimation(user.id)">
+            <mat-icon class="done-icon" inline="true">done</mat-icon>
+          </ng-container>
+
+          <form class="estimate-form" *ngIf="!roundDone && !getEstimation(user.id) && user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
+            <mat-form-field class="form-field" appearance="outline">
+              <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
+              <input matInput formControlName="points" required>
+              <mat-error *ngIf="estimationForm.controls.points.touched && estimationForm.controls.points.invalid">
+                <span *ngIf="estimationForm.controls.points.errors.required">{{ 'planning.room.points.mandatory' | translate }}</span>
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">{{ 'planning.room.estimate' | translate }}</button>
+          </form>
+        </mat-card>
       </ng-container>
-
-      <ng-container *ngIf="round && !roundDone && !getEstimation(user.id) && !(user.id === loggedUser.id)">
-        <mat-icon class="pending-icon" inline="true">pending</mat-icon>
-      </ng-container>
-
-      <ng-container *ngIf="round && !roundDone && getEstimation(user.id)">
-        <mat-icon class="done-icon" inline="true">done</mat-icon>
-      </ng-container>
-
-      <form class="estimate-form" *ngIf="round && !roundDone && !getEstimation(user.id) && user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
-          <input matInput formControlName="points" required>
-          <mat-error *ngIf="estimationForm.controls.points.touched && estimationForm.controls.points.invalid">
-            <span *ngIf="estimationForm.controls.points.errors.required">{{ 'planning.room.points.mandatory' | translate }}</span>
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">{{ 'planning.room.estimate' | translate }}</button>
-      </form>
-    </mat-card>
+    </div>
   </ng-container>
 </div>
