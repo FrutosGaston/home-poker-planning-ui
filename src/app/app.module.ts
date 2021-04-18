@@ -21,6 +21,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { RoomComponent } from './modules/planning/pages/room/room.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -48,6 +50,7 @@ const routes: Routes = [
     MatMenuModule,
     MatCheckboxModule,
     MatCardModule,
+    MatSlideToggleModule,
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({

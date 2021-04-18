@@ -16,4 +16,13 @@
 
 .app-container {
   padding: 10px 48px;
+  overflow: hidden;
+}
+
+.mat-app-background {
+  height: 100%;
+}
+
+.title {
+  font-weight: bold;
 }

@@ -1,11 +1,18 @@
-<mat-toolbar color="primary">
-  <a class="logo-container" routerLink="/"><img class="logo" src="assets/images/logo-hpp.svg"></a>
-  <span>Home Poker Planning</span>
-  <span class="spacer"></span>
-  <app-translation></app-translation>
-</mat-toolbar>
+<div class="mat-app-background">
+  <mat-toolbar color="primary">
+    <a class="logo-container" routerLink="/"><img class="logo" src="assets/images/logo-hpp.svg"></a>
+    <span class="title">Home Poker Planning</span>
+    <span class="spacer"></span>
+    <app-translation></app-translation>
+    |
+    <mat-icon class="mr-8">brightness_5</mat-icon>
+    <mat-slide-toggle [formControl]="toggleControl" class="mr-8">
+    </mat-slide-toggle>
+    <mat-icon>bedtime</mat-icon>
+  </mat-toolbar>
 
 
-<div class="app-container">
-  <router-outlet></router-outlet>
+  <div class="app-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>

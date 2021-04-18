@@ -28,7 +28,7 @@ export class GuestUserService {
   }
 
   findByRoom(roomId: number): Observable<GuestUserModel[]> {
-    return timer(1, 5000).pipe(
+    return timer(1, 500000).pipe(
       switchMap(() => this.http.get<GuestUserModel[]>(`${this.baseURL}?roomId=${roomId}`)
         .pipe(take(1))),
       retry(),

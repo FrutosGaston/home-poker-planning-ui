@@ -1,0 +1,12 @@
+$angular-dark-theme: mat-dark-theme(
+    (
+      color: (
+        primary: $primary,
+        accent: $accent,
+        warn: $warn,
+      ),
+    )
+);
+.darkMode {
+  @include angular-material-color($angular-dark-theme);
+}

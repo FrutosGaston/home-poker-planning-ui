@@ -9,6 +9,7 @@
 .users-container {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .estimate-form, .user-card {
@@ -20,6 +21,7 @@
 .user-card {
   flex: 1 1 0px;
   justify-content: space-between;
+  margin: 12px;
 }
 
 mat-icon {

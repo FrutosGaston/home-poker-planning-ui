@@ -1,4 +1,5 @@
 @import "hpp-theme";
+@import "dark-theme";
 
 .material-icons {
   font-family: 'Material Icons';
@@ -33,9 +34,27 @@ body {
   background: mat-color($accent, lighter) !important;
 }
 
+.darkMode .mat-menu-item:hover {
+  background: mat-color($accent, darker) !important;
+}
+
+.darkMode .mat-card {
+  background: #171717 !important;
+}
+
 @mixin md-icon-size($size: 24px) {
   font-size: $size !important;
   height: $size !important;
   width: $size !important;
   line-height: $size !important;
 }
+
+.darkMode .mat-menu-item {
+  color: white !important;
+}
+
+.darkMode .mat-error {
+  color: mat-color($accent);
+}
+
+html, body { height: 100% !important }

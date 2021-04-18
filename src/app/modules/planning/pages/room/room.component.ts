@@ -4,7 +4,7 @@ import {GuestUserModel} from '../../../../models/GuestUser.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RoundService} from '../../../../services/round.service';
 import {EstimationModel, RoundModel} from '../../../../models/Round.model';
-import {combineLatest, forkJoin, zip} from 'rxjs';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-room',
