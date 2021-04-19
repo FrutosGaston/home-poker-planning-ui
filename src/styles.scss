@@ -34,13 +34,26 @@ body {
   background: mat-color($accent, lighter) !important;
 }
 
-.darkMode .mat-menu-item:hover {
-  background: mat-color($accent, darker) !important;
+.dark-mode {
+  .mat-menu-item:hover, .task-list-element:hover {
+    background: mat-color($accent, 900) !important;
+  }
 }
 
-.darkMode .mat-card {
+.dark-mode .mat-card {
   background: #171717 !important;
 }
+
+button.active, .selected-task-list {
+  background: mat-color($accent);
+}
+
+.dark-mode {
+  button.active, .selected-task-list {
+    background: mat-color($accent, 800) !important;
+  }
+}
+
 
 @mixin md-icon-size($size: 24px) {
   font-size: $size !important;
@@ -49,12 +62,40 @@ body {
   line-height: $size !important;
 }
 
-.darkMode .mat-menu-item {
+.dark-mode .mat-menu-item {
   color: white !important;
 }
 
-.darkMode .mat-error {
+.dark-mode .mat-error {
   color: mat-color($accent);
 }
 
+.dark-mode .mat-sidenav-content, .dark-mode .mat-sidenav {
+  background: #303030 !important;
+  color: white;
+
+  h2 {
+    color: white !important;
+  }
+}
+
+.dark-mode .mat-list-item-content {
+  color: white;
+}
+
 html, body { height: 100% !important }
+
+mat-sidenav {
+  min-width: 200px !important;
+  max-width: 33% !important;
+}
+
+.mat-list-item-content {
+  justify-content: space-between;
+}
+
+.mat-list-item-content span {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}

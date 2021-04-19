@@ -1,4 +1,4 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,8 +21,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import { RoomComponent } from './modules/planning/pages/room/room.component';
 import {RouterModule, Routes} from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatSlideToggle, MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -51,6 +52,8 @@ const routes: Routes = [
     MatCheckboxModule,
     MatCardModule,
     MatSlideToggleModule,
+    MatSidenavModule,
+    MatListModule,
     ReactiveFormsModule,
     HttpClientModule,
     TranslateModule.forRoot({

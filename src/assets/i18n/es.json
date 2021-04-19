@@ -13,5 +13,6 @@
   "planning.room.points.mandatory": "Debe ingresar una estimacion",
   "planning.room.points.label": "Estimacion",
   "planning.room.estimate": "Estimar",
-  "planning.room.task.title": "Estimando la tarea: {{title}}"
+  "planning.room.task.title": "Estimando la tarea: {{title}}",
+  "planning.room.taskList.button": "Tareas"
 }

@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, timer} from 'rxjs';
 import {GuestUserModel} from '../models/GuestUser.model';
 import {map, retry, share, switchMap, take, tap} from 'rxjs/operators';
-import {RoundModel} from '../models/Round.model';
 
 @Injectable({
   providedIn: 'root'

@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.toggleControl.valueChanges.subscribe((darkMode) => {
-      const darkClassName = 'darkMode';
+      const darkClassName = 'dark-mode';
       this.className = darkMode ? darkClassName : '';
       if (darkMode) {
         this.overlay.getContainerElement().classList.add(darkClassName);
