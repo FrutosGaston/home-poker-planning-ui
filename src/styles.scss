@@ -62,8 +62,10 @@ button.active, .selected-task-list {
   line-height: $size !important;
 }
 
-.dark-mode .mat-menu-item {
-  color: white !important;
+.dark-mode {
+  .mat-menu-item, mat-form-field input {
+    color: white !important;
+  }
 }
 
 .dark-mode .mat-error {

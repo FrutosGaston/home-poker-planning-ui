@@ -54,6 +54,16 @@ mat-sidenav-content {
   font-size: 24px;
 }
 
+.final-estimation-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  * {
+    width: 50%;
+  }
+}
+
 .color-0 { color: #6666ff }
 .color-1 { color: #339933 }
 .color-2 { color: #ff9900 }

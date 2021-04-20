@@ -14,5 +14,7 @@
   "planning.room.points.label": "Estimation",
   "planning.room.estimate": "Estimate",
   "planning.room.task.title": "Estimating the task: {{title}}",
-  "planning.room.taskList.button": "Tasks"
+  "planning.room.taskList.button": "Tasks",
+  "planning.room.final-estimation.label": "Final Estimation",
+  "planning.room.task.final-estimation": "Estimated with: {{estimation}}"
 }

@@ -15,6 +15,7 @@ export class RoomComponent implements OnInit {
   loggedUser: GuestUserModel;
   usersInRoom: GuestUserModel[];
   estimationForm: FormGroup;
+  finalEstimationForm: FormGroup;
   currentTask: TaskModel;
   taskVotedByAll = false;
   tasks: TaskModel[];
@@ -44,21 +45,28 @@ export class RoomComponent implements OnInit {
     this.estimationForm = this.formBuilder.group({
       points: [null, [Validators.required]],
     });
+    this.finalEstimationForm = this.formBuilder.group({
+      points: [null, [Validators.required]],
+    });
   }
 
   private getCurrentTask(): TaskModel {
-    return this.tasks.find(task => !task.done());
+    return this.tasks.find(task => !task.done()) || this.tasks[0];
   }
 
   estimate(): void {
-    if (!this.estimationForm.valid) {
-      return;
-    }
+    if (!this.estimationForm.valid) { return; }
     const estimation = new EstimationModel();
     estimation.guestUserId = this.loggedUser.id;
     estimation.taskId = this.currentTask.id;
     estimation.name = this.estimationForm.value.points;
     this.taskService.estimate(estimation).subscribe(_ => {});
+  }
+
+  finalEstimation(): void {
+    if (!this.finalEstimationForm.valid) { return; }
+    this.currentTask.finalEstimation = this.finalEstimationForm.value.points;
+    this.taskService.updateTask(this.currentTask).subscribe(_ => {});
   }
 
   private fakeUser(): GuestUserModel {

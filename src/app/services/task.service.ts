@@ -9,7 +9,7 @@ import {EstimationModel, TaskModel} from '../models/Task.model';
 })
 export class TaskService {
 
-  baseURL = 'http://localhost:8080/api/v1/tasks/';
+  baseURL = 'http://localhost:8080/api/v1/tasks';
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,7 @@ export class TaskService {
                                         map(tasks => tasks.map(task => new TaskModel(task)))
                                       )
       ),
-      retry(),
+      retry(3),
       share()
     );
   }
@@ -30,6 +30,13 @@ export class TaskService {
     const headers = { 'content-type': 'application/json'};
     const body = JSON.stringify(estimation);
     return this.http.post<number>(`${this.baseURL}/estimations`, body, { headers })
+      .pipe(take(1));
+  }
+
+  updateTask(task: TaskModel): Observable<any> {
+    const headers = { 'content-type': 'application/json'};
+    const body = JSON.stringify(task);
+    return this.http.patch<number>(`${this.baseURL}/${task.id}`, body, { headers })
       .pipe(take(1));
   }
 }
