@@ -16,5 +16,8 @@
   "planning.room.task.title": "Estimating the task: {{title}}",
   "planning.room.taskList.button": "Tasks",
   "planning.room.final-estimation.label": "Final Estimation",
-  "planning.room.task.final-estimation": "Estimated with: {{estimation}}"
+  "planning.room.task.final-estimation": "Estimated with: {{estimation}}",
+  "planning.home.title": "Play Planning Poker with your fellows!",
+  "planning.home.subtitle": "You will be able to create a room, choose your favourite deck of cards and start estimating all your tasks",
+  "planning.home.join-room": "Join room"
 }

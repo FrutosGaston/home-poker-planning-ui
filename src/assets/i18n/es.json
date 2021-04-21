@@ -16,5 +16,8 @@
   "planning.room.task.title": "Estimando la tarea: {{title}}",
   "planning.room.taskList.button": "Tareas",
   "planning.room.final-estimation.label": "Estimacion Final",
-  "planning.room.task.final-estimation": "Tarea estimada en: {{estimation}}"
+  "planning.room.task.final-estimation": "Tarea estimada en: {{estimation}}",
+  "planning.home.title": "Practica Planning Poker con tus compañeros!",
+  "planning.home.subtitle": "Podrás crear una sala, elegir tu baraja de cartas favorita y comenzar a estimar todas tus tareas",
+  "planning.home.join-room": "Unete a una sala"
 }

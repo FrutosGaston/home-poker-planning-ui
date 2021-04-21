@@ -1,3 +1,33 @@
+@import "src/styles";
+
+.container {
+  padding: 12px 15%;
+  display: flex;
+  flex-direction: column;
+}
+
 .guest-login-container {
-  padding: 12px 48px;
+  margin-top: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.guest-login {
+  width: 50%;
+}
+
+.join-room {
+  font-size: 32px;
+  color: mat-color($primary);
+}
+
+.title {
+  margin-bottom: 0;
+}
+
+.abstract-shape.shape1 {
+  left: 15%;
+  top: 100px;
 }

@@ -24,6 +24,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import {AbstractShapeComponent} from './util/abstract-shape/abstract-shape.component';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -36,7 +37,8 @@ const routes: Routes = [
     PlanningHomeComponent,
     TranslationComponent,
     GuestLoginComponent,
-    RoomComponent
+    RoomComponent,
+    AbstractShapeComponent
   ],
   imports: [
     BrowserModule,

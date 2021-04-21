@@ -1,6 +1,35 @@
 @import "hpp-theme";
 @import "dark-theme";
 
+$cyan: mat-palette($mat-cyan, A400);
+
+@font-face {
+  font-family: 'silka';
+  src: url('assets/fonts/silka-regular.otf') format("opentype");
+  font-weight: 400;
+  font-display: swap
+}
+
+@font-face {
+  font-family: 'silka';
+  src: url('assets/fonts/silka-medium.ttf') format("truetype");
+  font-weight: 500;
+  font-display: swap
+}
+
+@font-face {
+  font-family: 'silka';
+  src: url('assets/fonts/silka-bold.ttf') format("truetype");
+  font-weight: 700;
+  font-display: swap
+}
+
+body {
+  margin: 0;
+  background-color: white;
+  font-family: 'silka', "Helvetica Neue", sans-serif;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -42,6 +71,7 @@ body {
 
 .dark-mode .mat-card {
   background: #171717 !important;
+  color: white !important;
 }
 
 button.active, .selected-task-list {
@@ -51,6 +81,29 @@ button.active, .selected-task-list {
 .dark-mode {
   button.active, .selected-task-list {
     background: mat-color($accent, 800) !important;
+  }
+}
+
+.floating-object {
+  animation-name: floating-object;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating-object {
+  from { transform: translate(0,  0px); }
+  50%  { transform: translate(0, 5px); }
+  to   { transform: translate(0, -0px); }
+}
+
+.abstract-shape {
+  position: absolute;
+  z-index: -1;
+
+
+  svg {
+    overflow: inherit;
   }
 }
 
@@ -84,8 +137,6 @@ button.active, .selected-task-list {
 .dark-mode .mat-list-item-content {
   color: white;
 }
-
-html, body { height: 100% !important }
 
 mat-sidenav {
   min-width: 200px !important;

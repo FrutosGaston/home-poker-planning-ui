@@ -1,0 +1,9 @@
+@import "src/styles";
+
+path {
+  fill: mat-color($cyan);
+}
+
+:host-context(.dark-mode) path {
+  fill: mat-color($cyan, darker) !important;
+}

@@ -1,3 +1,19 @@
-<div class="guest-login-container">
-  <app-guest-login></app-guest-login>
-</div>
+<ng-container>
+  <app-abstract-shape
+    class="abstract-shape shape1"
+    initialShape="M421.84 183.863c41.842 72.274 82.599 125.801 82.872 188.566.27 62.765-39.807 134.496-108.142 179.871-68.335 45.24-165.063 63.988-241.413 30.975C78.67 550.262 22.563 465.353 5.58 375.961c-16.982-89.528 5.298-183.54 59.912-258.667C119.97 42.031 206.78-14.213 271.72 3.176c64.938 17.39 108.14 108.412 150.12 180.687z"
+    finalShape="M497.964 125.495c61.963 80.797 89.942 185.343 54.456 248.944-35.622 63.464-134.98 86.12-224.65 129.794C238.101 547.908 157.986 612.6 98.89 597.86 39.928 583.12 1.986 488.947.075 407.467c-1.91-81.48 32.346-150.267 79.16-227.516 46.813-77.385 106.183-163.233 183.705-177.7 77.522-14.467 173.196 42.446 235.023 123.244z"
+    color="#81D4FA"
+    duration="30">
+  </app-abstract-shape>
+
+  <div class="container">
+    <h1 class="title">{{'planning.home.title' | translate }}</h1>
+    <h2 class="subtitle">{{'planning.home.subtitle' | translate }}</h2>
+
+    <div class="guest-login-container">
+      <span class="join-room">{{'planning.home.join-room' | translate }}</span>
+      <app-guest-login class="guest-login"></app-guest-login>
+    </div>
+  </div>
+</ng-container>
