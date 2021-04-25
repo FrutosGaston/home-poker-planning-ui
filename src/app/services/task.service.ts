@@ -14,7 +14,7 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getByRoom(roomId: number): Observable<TaskModel[]> {
-    return timer(1, 1500).pipe(
+    return timer(1, 5000).pipe(
       switchMap(() => this.http.get<TaskModel[]>(`${this.baseURL}?roomId=${roomId}`)
                                       .pipe(
                                         take(1),

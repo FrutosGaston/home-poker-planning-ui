@@ -3,16 +3,16 @@
     <form [formGroup]="guestForm" (submit)="submit()">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>{{ 'planning.home.name' | translate }}</mat-label>
-        <input matInput formControlName="name" required>
+        <input matInput formControlName="name" required autocomplete="off">
         <mat-error *ngIf="guestForm.controls.name.touched && guestForm.controls.name.invalid">
           <span *ngIf="guestForm.controls.name.errors.required">{{ 'planning.home.name.mandatory' | translate }}</span>
           <span *ngIf="guestForm.controls.name.errors.minlength">{{ 'planning.home.name.min' | translate }}</span>
-          <span *ngIf="guestForm.controls.name.errors.minlength">{{ 'planning.home.name.max' | translate }}</span>
+          <span *ngIf="guestForm.controls.name.errors.maxlength">{{ 'planning.home.name.max' | translate }}</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>{{ 'planning.home.roomId' | translate }}</mat-label>
-        <input matInput formControlName="roomId" required>
+        <input matInput formControlName="roomId" required autocomplete="off">
         <mat-error *ngIf="guestForm.controls.roomId.touched && guestForm.controls.roomId.invalid">
           <span *ngIf="guestForm.controls.roomId.errors.required">{{ 'planning.home.roomId.mandatory' | translate }}</span>
           <span *ngIf="guestForm.controls.roomId.errors.min">{{ 'planning.home.roomId.min' | translate }}</span>

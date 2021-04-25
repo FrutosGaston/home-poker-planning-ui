@@ -50,7 +50,7 @@
               <form class="estimate-form" *ngIf="!taskVotedByAll && !currentTask.done() && !getEstimation(user.id) && user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
                 <mat-form-field class="form-field" appearance="outline">
                   <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
-                  <input matInput formControlName="points" required>
+                  <input matInput formControlName="points" required autocomplete="off">
                   <mat-error *ngIf="estimationForm.controls.points.touched && estimationForm.controls.points.invalid">
                     <span *ngIf="estimationForm.controls.points.errors.required">{{ 'planning.room.points.mandatory' | translate }}</span>
                   </mat-error>
@@ -65,7 +65,7 @@
       <form class="final-estimation-form" *ngIf="currentTask" [formGroup]="finalEstimationForm" (submit)="finalEstimation()">
         <mat-form-field class="form-field" appearance="outline">
           <mat-label>{{ 'planning.room.final-estimation.label' | translate }}</mat-label>
-          <input matInput formControlName="points" required>
+          <input matInput formControlName="points" required autocomplete="off">
           <mat-error *ngIf="finalEstimationForm.controls.points.touched && estimationForm.controls.points.invalid">
             <span *ngIf="finalEstimationForm.controls.points.errors && finalEstimationForm.controls.points.errors.required">
               {{ 'planning.room.points.mandatory' | translate }}</span>

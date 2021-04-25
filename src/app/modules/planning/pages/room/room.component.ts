@@ -38,6 +38,9 @@ export class RoomComponent implements OnInit {
       this.tasks = results[1].sort(TaskModel.dateComparator);
       if (!this.manuallySelectedTask) {
         this.currentTask = this.getCurrentTask();
+        this.manuallySelectedTask = true;
+      } else {
+        this.currentTask = this.tasks.find(task => task.id === this.currentTask.id);
       }
       this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom);
     });
@@ -84,5 +87,7 @@ export class RoomComponent implements OnInit {
   taskSelected($event: MouseEvent, task: TaskModel): void {
     this.manuallySelectedTask = true;
     this.currentTask = task;
+    this.finalEstimationForm.reset();
+    this.estimationForm.reset();
   }
 }
