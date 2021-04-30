@@ -8,7 +8,7 @@ import {OverlayContainer} from '@angular/cdk/overlay';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'home-poker-planning-ui';
+  title = 'Home Planning Poker';
   toggleControl = new FormControl(false);
   @HostBinding('class') className = '';
 

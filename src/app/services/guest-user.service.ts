@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, timer} from 'rxjs';
 import {GuestUserModel} from '../models/GuestUser.model';
-import {map, retry, share, switchMap, take, tap} from 'rxjs/operators';
+import {retry, share, switchMap, take, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +27,8 @@ export class GuestUserService {
   }
 
   findByRoom(roomId: number): Observable<GuestUserModel[]> {
-    return timer(1, 5000).pipe(
-      switchMap(() => this.http.get<GuestUserModel[]>(`${this.baseURL}?roomId=${roomId}`)
-        .pipe(take(1))),
-      retry(),
-      share()
-    );
+    return this.http.get<GuestUserModel[]>(`${this.baseURL}?roomId=${roomId}`)
+      .pipe(take(1));
   }
 
   get loggedGuestUser(): GuestUserModel {

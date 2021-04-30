@@ -1,19 +1,19 @@
 import {GuestUserModel} from './GuestUser.model';
 
 export class EstimationModel {
-  id: number;
+  id?: number;
   name: string;
   guestUserId: number;
   taskId: number;
-  createdAt: Date;
+  createdAt?: Date;
 }
 
 export class TaskModel {
-  id: number;
+  id?: number;
   title: string;
-  finalEstimation: string;
-  estimations: EstimationModel[];
-  createdAt: Date;
+  finalEstimation?: string;
+  estimations?: EstimationModel[];
+  createdAt?: Date;
 
   constructor(task: any) {
     this.id = task.id;

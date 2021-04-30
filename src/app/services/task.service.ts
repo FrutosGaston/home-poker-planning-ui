@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, timer} from 'rxjs';
-import {map, retry, share, switchMap, take} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {map, take} from 'rxjs/operators';
 import {EstimationModel, TaskModel} from '../models/Task.model';
 
 @Injectable({
@@ -14,16 +14,11 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getByRoom(roomId: number): Observable<TaskModel[]> {
-    return timer(1, 5000).pipe(
-      switchMap(() => this.http.get<TaskModel[]>(`${this.baseURL}?roomId=${roomId}`)
+    return this.http.get<TaskModel[]>(`${this.baseURL}?roomId=${roomId}`)
                                       .pipe(
                                         take(1),
                                         map(tasks => tasks.map(task => new TaskModel(task)))
-                                      )
-      ),
-      retry(3),
-      share()
-    );
+                                      );
   }
 
   estimate(estimation: EstimationModel): Observable<number> {

@@ -23,13 +23,13 @@ describe('AppComponent', () => {
   it(`should have as title 'home-poker-planning-ui'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('home-poker-planning-ui');
+    expect(app.title).toEqual('Home Planning Poker');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('home-poker-planning-ui app is running!');
+    expect(compiled.querySelector('.title').textContent).toContain('Home Planning Poker');
   });
 });

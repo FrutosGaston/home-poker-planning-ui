@@ -1,5 +1,5 @@
 export class GuestUserModel {
-  id: number;
+  id?: number;
   name: string;
   roomId: number;
 }
