@@ -14,7 +14,7 @@ export class GuestLoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private roomService: GuestUserService,
+    private guestUserService: GuestUserService,
     private router: Router
   ) { }
 
@@ -29,7 +29,7 @@ export class GuestLoginComponent implements OnInit {
     if (!this.guestForm.valid) {
       return;
     }
-    this.roomService.create(this.guestForm.value).subscribe(res => this.router.navigateByUrl('/room')
+    this.guestUserService.create(this.guestForm.value).subscribe(res => this.router.navigateByUrl('/room')
       , error => console.error(error));
   }
 

@@ -8,8 +8,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class PlanningHomeComponent implements OnInit {
 
-  guestForm: FormGroup;
-
   constructor() { }
 
   ngOnInit(): void {}
