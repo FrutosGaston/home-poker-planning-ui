@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, timer} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {GuestUserModel} from '../models/GuestUser.model';
-import {retry, share, switchMap, take, tap} from 'rxjs/operators';
+import {take, tap} from 'rxjs/operators';
+import {CompatClient, Stomp, StompSubscription} from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,7 @@ export class GuestUserService {
   baseURL = 'http://localhost:8080/api/v1/guest-users/';
   // tslint:disable-next-line:variable-name
   private _loggedGuestUser: GuestUserModel;
+  private stompClient: CompatClient;
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +32,18 @@ export class GuestUserService {
   findByRoom(roomId: number): Observable<GuestUserModel[]> {
     return this.http.get<GuestUserModel[]>(`${this.baseURL}?roomId=${roomId}`)
       .pipe(take(1));
+  }
+
+  onNewGuestUser(roomId: number, handler: (GuestUserModel) => any): void {
+    const socket = new SockJS('http://localhost:8080/');
+    this.stompClient = Stomp.over(socket);
+    const self = this;
+
+    this.stompClient.connect({}, _ => {
+      self.stompClient.subscribe(`/room/${roomId}/guest-users/created`, meesage => {
+        handler(JSON.parse(meesage.body));
+      });
+    });
   }
 
   get loggedGuestUser(): GuestUserModel {

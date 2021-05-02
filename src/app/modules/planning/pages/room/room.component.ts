@@ -19,7 +19,6 @@ export class RoomComponent implements OnInit {
   currentTask: TaskModel;
   taskVotedByAll = false;
   tasks: TaskModel[];
-  private manuallySelectedTask = false;
 
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
@@ -36,14 +35,15 @@ export class RoomComponent implements OnInit {
     combineLatest([users$, tasks$]).subscribe(results => {
       this.usersInRoom = results[0];
       this.tasks = results[1].sort(TaskModel.dateComparator);
-      if (!this.manuallySelectedTask) {
+      if (!this.currentTask) {
         this.currentTask = this.getCurrentTask();
-        this.manuallySelectedTask = true;
       } else {
         this.currentTask = this.tasks.find(task => task.id === this.currentTask.id);
       }
       this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom);
     });
+
+    this.bindGuestUserCreated();
 
     this.estimationForm = this.formBuilder.group({
       points: [null, [Validators.required]],
@@ -85,9 +85,14 @@ export class RoomComponent implements OnInit {
   }
 
   taskSelected($event: MouseEvent, task: TaskModel): void {
-    this.manuallySelectedTask = true;
     this.currentTask = task;
     this.finalEstimationForm.reset();
     this.estimationForm.reset();
+  }
+
+  private bindGuestUserCreated(): void {
+    this.guestUserService.onNewGuestUser(this.loggedUser.roomId, (guestUser) => {
+      this.usersInRoom.push(guestUser);
+    });
   }
 }
