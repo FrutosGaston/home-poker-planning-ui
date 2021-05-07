@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {EstimationModel, TaskModel} from '../models/Task.model';
+import {WebsocketService} from './websocket.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class TaskService {
 
   baseURL = 'http://localhost:8080/api/v1/tasks';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private websocketService: WebsocketService) {}
 
   getByRoom(roomId: number): Observable<TaskModel[]> {
     return this.http.get<TaskModel[]>(`${this.baseURL}?roomId=${roomId}`)
@@ -34,4 +35,13 @@ export class TaskService {
     return this.http.patch<number>(`${this.baseURL}/${task.id}`, body, { headers })
       .pipe(take(1));
   }
+
+  onNewEstimation(roomId: number, handler: (EstimationModel) => any): void {
+    this.websocketService.subscribe(`/room/${roomId}/estimations/created`, handler);
+  }
+
+  onTaskUpdated(roomId: number, handler: (EstimationModel) => any): void {
+    this.websocketService.subscribe(`/room/${roomId}/tasks/updated`, handler);
+  }
+
 }

@@ -35,19 +35,19 @@
             <mat-card class="user-card">
               <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
 
-              <ng-container *ngIf="taskVotedByAll || currentTask.done() && getEstimation(user.id)">
+              <ng-container *ngIf="taskVotedByAll || taskDone && (user.id)">
                 <strong>{{getEstimation(user.id).name}}</strong>
               </ng-container>
 
-              <ng-container *ngIf="!taskVotedByAll && !currentTask.done() && !getEstimation(user.id) && !(user.id === loggedUser.id)">
+              <ng-container *ngIf="!taskVotedByAll && !taskDone && !getEstimation(user.id) && !(user.id === loggedUser.id)">
                 <mat-icon class="pending-icon" inline="true">pending</mat-icon>
               </ng-container>
 
-              <ng-container *ngIf="!taskVotedByAll && !currentTask.done() && getEstimation(user.id)">
+              <ng-container *ngIf="!taskVotedByAll && !taskDone && getEstimation(user.id)">
                 <mat-icon class="done-icon" inline="true">done</mat-icon>
               </ng-container>
 
-              <form class="estimate-form" *ngIf="!taskVotedByAll && !currentTask.done() && !getEstimation(user.id) && user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
+              <form class="estimate-form" *ngIf="!taskVotedByAll && !taskDone && !getEstimation(user.id) && user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
                 <mat-form-field class="form-field" appearance="outline">
                   <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
                   <input matInput formControlName="points" required autocomplete="off">

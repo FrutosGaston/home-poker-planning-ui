@@ -19,6 +19,7 @@ export class RoomComponent implements OnInit {
   currentTask: TaskModel;
   taskVotedByAll = false;
   tasks: TaskModel[];
+  taskDone: boolean;
 
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
@@ -27,24 +28,36 @@ export class RoomComponent implements OnInit {
   ngOnInit(): void {
     this.loggedUser = this.guestUserService.loggedGuestUser || this.fakeUser();
     if (!this.loggedUser) { return; }
-    const currentRoom = this.loggedUser.roomId;
+    this.setupState();
+    this.bindGuestUserCreated();
+    this.bindEstimationCreated();
+    this.bindTaskUpdated();
+    this.setupForms();
+  }
 
+  private setupState(): void {
+    const currentRoom = this.getRoomId();
     const users$ = this.guestUserService.findByRoom(currentRoom);
     const tasks$ = this.taskService.getByRoom(currentRoom);
 
     combineLatest([users$, tasks$]).subscribe(results => {
       this.usersInRoom = results[0];
       this.tasks = results[1].sort(TaskModel.dateComparator);
-      if (!this.currentTask) {
-        this.currentTask = this.getCurrentTask();
-      } else {
-        this.currentTask = this.tasks.find(task => task.id === this.currentTask.id);
-      }
+      this.setCurrentTask();
       this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom);
     });
+  }
 
-    this.bindGuestUserCreated();
+  private setCurrentTask(): void {
+    if (!this.currentTask) {
+      this.currentTask = this.getCurrentTask();
+    } else {
+      this.currentTask = this.tasks.find(task => task.id === this.currentTask.id);
+    }
+    this.taskDone = this.currentTask.done();
+  }
 
+  private setupForms(): void {
     this.estimationForm = this.formBuilder.group({
       points: [null, [Validators.required]],
     });
@@ -86,13 +99,32 @@ export class RoomComponent implements OnInit {
 
   taskSelected($event: MouseEvent, task: TaskModel): void {
     this.currentTask = task;
+    this.taskDone = this.currentTask.done();
     this.finalEstimationForm.reset();
     this.estimationForm.reset();
   }
 
   private bindGuestUserCreated(): void {
-    this.guestUserService.onNewGuestUser(this.loggedUser.roomId, (guestUser) => {
+    this.guestUserService.onNewGuestUser(this.getRoomId(), (guestUser) => {
       this.usersInRoom.push(guestUser);
     });
+  }
+
+  private bindEstimationCreated(): void {
+    this.taskService.onNewEstimation(this.getRoomId(), (estimation) => {
+      const estimationTask = this.tasks.find(task => task.id === estimation.taskId);
+      estimationTask.estimations.push(estimation);
+    });
+  }
+
+  private bindTaskUpdated(): void {
+    this.taskService.onTaskUpdated(this.getRoomId(), (updatedTask) => {
+      const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.taskId);
+      this.tasks[taskIndex] = updatedTask;
+    });
+  }
+
+  private getRoomId(): number {
+    return this.loggedUser.roomId;
   }
 }
