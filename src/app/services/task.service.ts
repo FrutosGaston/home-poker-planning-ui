@@ -3,7 +3,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {EstimationModel, TaskModel} from '../models/Task.model';
-import {WebsocketService} from './websocket.service';
+import {Message} from '@stomp/stompjs';
+import {RxStompService} from '@stomp/ng2-stompjs';
+import {CaseConverter} from '../util/case-converter';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class TaskService {
 
   baseURL = 'http://localhost:8080/api/v1/tasks';
 
-  constructor(private http: HttpClient, private websocketService: WebsocketService) {}
+  constructor(private http: HttpClient, private rxStompService: RxStompService) {}
 
   getByRoom(roomId: number): Observable<TaskModel[]> {
     return this.http.get<TaskModel[]>(`${this.baseURL}?roomId=${roomId}`)
@@ -36,12 +38,16 @@ export class TaskService {
       .pipe(take(1));
   }
 
-  onNewEstimation(roomId: number, handler: (EstimationModel) => any): void {
-    this.websocketService.subscribe(`/room/${roomId}/estimations/created`, handler);
+  onNewEstimation(roomId: number): Observable<EstimationModel> {
+    return this.rxStompService.watch(`/room/${roomId}/estimations/created`).pipe(
+      map((message: Message) => CaseConverter.keysToCamel(JSON.parse(message.body)) as EstimationModel)
+    );
   }
 
-  onTaskUpdated(roomId: number, handler: (EstimationModel) => any): void {
-    this.websocketService.subscribe(`/room/${roomId}/tasks/updated`, handler);
+  onTaskUpdated(roomId: number): Observable<TaskModel> {
+    return this.rxStompService.watch(`/room/${roomId}/tasks/updated`).pipe(
+      map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
+    );
   }
 
 }

@@ -2,13 +2,16 @@ import {EstimationModel, TaskModel} from '../models/Task.model';
 import {of, throwError} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {TaskService} from './task.service';
+import {GuestUserService} from './guest-user.service';
 
 let httpClientSpy: { get: jasmine.Spy, post: jasmine.Spy, patch: jasmine.Spy };
+let rxStompService: { watch: jasmine.Spy };
 let taskService: TaskService;
 
 beforeEach(() => {
   httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'patch']);
-  taskService = new TaskService(httpClientSpy as any);
+  rxStompService = jasmine.createSpyObj('RxStompService', ['watch']);
+  taskService = new TaskService(httpClientSpy as any, rxStompService as any);
 });
 
 it('should return expected guest tasks (HttpClient called once)', () => {

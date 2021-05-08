@@ -10,6 +10,7 @@ export class EstimationModel {
 
 export class TaskModel {
   id?: number;
+  roomId?: number;
   title: string;
   finalEstimation?: string;
   estimations?: EstimationModel[];
@@ -17,6 +18,7 @@ export class TaskModel {
 
   constructor(task: any) {
     this.id = task.id;
+    this.roomId = task.roomId;
     this.title = task.title;
     this.estimations = task.estimations;
     this.finalEstimation = task.finalEstimation;

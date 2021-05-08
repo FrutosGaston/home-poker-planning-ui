@@ -25,6 +25,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {AbstractShapeComponent} from './util/abstract-shape/abstract-shape.component';
+import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
+import {myRxStompConfig} from './my-rx-stomp.config';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -69,7 +71,17 @@ const routes: Routes = [
     })
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [
+    {
+      provide: InjectableRxStompConfig,
+      useValue: myRxStompConfig,
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig],
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

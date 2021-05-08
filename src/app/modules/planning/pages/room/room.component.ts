@@ -44,8 +44,12 @@ export class RoomComponent implements OnInit {
       this.usersInRoom = results[0];
       this.tasks = results[1].sort(TaskModel.dateComparator);
       this.setCurrentTask();
-      this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom);
     });
+  }
+
+  private updateTaskState(): void {
+    this.taskDone = this.currentTask.done();
+    this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom);
   }
 
   private setCurrentTask(): void {
@@ -54,7 +58,7 @@ export class RoomComponent implements OnInit {
     } else {
       this.currentTask = this.tasks.find(task => task.id === this.currentTask.id);
     }
-    this.taskDone = this.currentTask.done();
+    this.updateTaskState();
   }
 
   private setupForms(): void {
@@ -94,33 +98,38 @@ export class RoomComponent implements OnInit {
   }
 
   getEstimation(id: number): EstimationModel {
-    return this.currentTask.estimations.find(estimation => estimation.guestUserId === id);
+    return this.currentTask.estimations && this.currentTask.estimations.find(estimation => estimation.guestUserId === id);
   }
 
   taskSelected($event: MouseEvent, task: TaskModel): void {
     this.currentTask = task;
-    this.taskDone = this.currentTask.done();
+    this.updateTaskState();
     this.finalEstimationForm.reset();
     this.estimationForm.reset();
   }
 
   private bindGuestUserCreated(): void {
-    this.guestUserService.onNewGuestUser(this.getRoomId(), (guestUser) => {
+    this.guestUserService.onNewGuestUser(this.getRoomId()).subscribe((guestUser) => {
       this.usersInRoom.push(guestUser);
+      this.updateTaskState();
     });
   }
 
   private bindEstimationCreated(): void {
-    this.taskService.onNewEstimation(this.getRoomId(), (estimation) => {
+    this.taskService.onNewEstimation(this.getRoomId()).subscribe((estimation) => {
       const estimationTask = this.tasks.find(task => task.id === estimation.taskId);
       estimationTask.estimations.push(estimation);
+      this.updateTaskState();
     });
   }
 
   private bindTaskUpdated(): void {
-    this.taskService.onTaskUpdated(this.getRoomId(), (updatedTask) => {
-      const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.taskId);
-      this.tasks[taskIndex] = updatedTask;
+    this.taskService.onTaskUpdated(this.getRoomId()).subscribe((updatedTask) => {
+      const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.id);
+      const taskToUpdate = this.tasks[taskIndex];
+      taskToUpdate.finalEstimation = updatedTask.finalEstimation;
+      taskToUpdate.title = updatedTask.title;
+      this.updateTaskState();
     });
   }
 

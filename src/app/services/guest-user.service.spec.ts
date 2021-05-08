@@ -4,11 +4,13 @@ import {of, throwError} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 
 let httpClientSpy: { get: jasmine.Spy, post: jasmine.Spy };
+let rxStompService: { watch: jasmine.Spy };
 let guestUserService: GuestUserService;
 
 beforeEach(() => {
   httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
-  guestUserService = new GuestUserService(httpClientSpy as any);
+  rxStompService = jasmine.createSpyObj('RxStompService', ['watch']);
+  guestUserService = new GuestUserService(httpClientSpy as any, rxStompService as any);
 });
 
 it('should return expected guest users (HttpClient called once)', () => {
