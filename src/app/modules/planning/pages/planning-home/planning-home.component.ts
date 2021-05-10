@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanningHomeComponent implements OnInit {
 
+  showCreateRoomForm = false;
+
   constructor() { }
 
   ngOnInit(): void {}
 
+  toggleCreateRoomForm(): void {
+    this.showCreateRoomForm = !this.showCreateRoomForm;
+  }
 }

@@ -37,7 +37,10 @@ export class GuestUserService {
 
   onNewGuestUser(roomId: number): Observable<GuestUserModel> {
     return this.rxStompService.watch(`/room/${roomId}/guest-users/created`).pipe(
-      map((message: Message) => CaseConverter.keysToCamel(JSON.parse(message.body)) as GuestUserModel)
+      map((message: Message) => {
+        const jsonBody = message.body;
+        return CaseConverter.keysToCamel(JSON.parse(jsonBody)) as GuestUserModel;
+      })
     );
   }
 

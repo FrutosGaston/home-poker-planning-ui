@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../../../../services/task.service';
 import {EstimationModel, TaskModel} from '../../../../models/Task.model';
 import {combineLatest} from 'rxjs';
+import {RoomService} from '../../../../services/room.service';
+import {RoomModel} from '../../../../models/Room.model';
 
 @Component({
   selector: 'app-room',
@@ -20,19 +22,24 @@ export class RoomComponent implements OnInit {
   taskVotedByAll = false;
   tasks: TaskModel[];
   taskDone: boolean;
+  room: RoomModel;
 
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
+              private roomService: RoomService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.loggedUser = this.guestUserService.loggedGuestUser || this.fakeUser();
     if (!this.loggedUser) { return; }
-    this.setupState();
-    this.bindGuestUserCreated();
-    this.bindEstimationCreated();
-    this.bindTaskUpdated();
-    this.setupForms();
+    this.roomService.get(this.loggedUser.roomId).subscribe(room => {
+      this.room = room;
+      this.setupState();
+      this.bindGuestUserCreated();
+      this.bindEstimationCreated();
+      this.bindTaskUpdated();
+      this.setupForms();
+    });
   }
 
   private setupState(): void {
@@ -134,6 +141,6 @@ export class RoomComponent implements OnInit {
   }
 
   private getRoomId(): number {
-    return this.loggedUser.roomId;
+    return this.room.id;
   }
 }

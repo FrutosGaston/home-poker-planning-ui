@@ -12,8 +12,25 @@
     <h2 class="subtitle">{{'planning.home.subtitle' | translate }}</h2>
 
     <div class="guest-login-container">
-      <span class="join-room">{{'planning.home.join-room' | translate }}</span>
-      <app-guest-login class="guest-login"></app-guest-login>
+      <div class="join-or-create-title-container">
+        <span class="join-room">{{'planning.home.join-room' | translate }}</span>
+        <button mat-raised-button color="primary" type="button" aria-label="Toggle create room form"
+                class="create-button" (click)="toggleCreateRoomForm()">
+          <mat-icon class="create-button-icon" aria-label="Toggle create room form icon">add_circle</mat-icon>{{'planning.home.create-room-button' | translate }}
+        </button>
+      </div>
+
+      <app-guest-login class="guest-login" *ngIf="!showCreateRoomForm"></app-guest-login>
+      <app-create-room class="create-room-form" *ngIf="showCreateRoomForm"></app-create-room>
     </div>
+
+    <div class="create-room-container">
+      <div class="create-button-container">
+
+      </div>
+
+
+    </div>
+
   </div>
 </ng-container>

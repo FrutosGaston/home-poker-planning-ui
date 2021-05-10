@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="form-container">
+    <form [formGroup]="roomForm" (submit)="submit()">
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>{{ 'planning.home.name' | translate }}</mat-label>
+        <input matInput formControlName="name" required autocomplete="off">
+        <mat-error *ngIf="roomForm.controls.name.touched && roomForm.controls.name.invalid">
+          <span *ngIf="roomForm.controls.name.errors.required">{{ 'planning.home.name.mandatory' | translate }}</span>
+          <span *ngIf="roomForm.controls.name.errors.minlength">{{ 'planning.home.name.min' | translate }}</span>
+          <span *ngIf="roomForm.controls.name.errors.maxlength">{{ 'planning.home.name.max' | translate }}</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>{{ 'planning.home.room-form.title' | translate }}</mat-label>
+        <input matInput formControlName="title" required autocomplete="off">
+        <mat-error *ngIf="roomForm.controls.title.touched && roomForm.controls.title.invalid">
+          <span *ngIf="roomForm.controls.title.errors.required">{{ 'planning.home.room-form.title.mandatory' | translate }}</span>
+          <span *ngIf="roomForm.controls.title.errors.minlength">{{ 'planning.home.room-form.title.min' | translate }}</span>
+          <span *ngIf="roomForm.controls.title.errors.maxlength">{{ 'planning.home.room-form.title.max' | translate }}</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>{{ 'planning.home.room-form.description' | translate }}</mat-label>
+        <input matInput formControlName="description" autocomplete="off">
+        <mat-error *ngIf="roomForm.controls.description.touched && roomForm.controls.description.invalid">
+          <span *ngIf="roomForm.controls.description.errors.maxLength">{{ 'planning.home.room-form.description.max' | translate }}</span>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">{{ 'planning.home.room-form.submit' | translate }}</button>
+    </form>
+  </div>
+</div>

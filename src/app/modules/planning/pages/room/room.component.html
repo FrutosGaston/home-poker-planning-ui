@@ -19,7 +19,10 @@
 
   <mat-sidenav-content class="sidenav-content">
 
-    <div *ngIf="loggedUser">
+    <div *ngIf="loggedUser && room">
+      <h1>{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
+      <h2 *ngIf="room.description">{{room.description}}</h2>
+
       <button mat-raised-button type="button" aria-label="Toggle sidenav" (click)="sidenav.toggle()"
               color="primary" class="toggle-button">
         <mat-icon aria-label="Side nav toggle icon">list</mat-icon>
