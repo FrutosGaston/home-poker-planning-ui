@@ -7,6 +7,7 @@ import {EstimationModel, TaskModel} from '../../../../models/Task.model';
 import {combineLatest} from 'rxjs';
 import {RoomService} from '../../../../services/room.service';
 import {RoomModel} from '../../../../models/Room.model';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-room',
@@ -27,18 +28,22 @@ export class RoomComponent implements OnInit {
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
               private roomService: RoomService,
+              private route: ActivatedRoute,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.loggedUser = this.guestUserService.loggedGuestUser || this.fakeUser();
     if (!this.loggedUser) { return; }
-    this.roomService.get(this.loggedUser.roomId).subscribe(room => {
-      this.room = room;
-      this.setupState();
-      this.bindGuestUserCreated();
-      this.bindEstimationCreated();
-      this.bindTaskUpdated();
-      this.setupForms();
+    this.route.params.subscribe(params => {
+      const roomId = params.id || this.loggedUser.roomId;
+      this.roomService.get(roomId).subscribe(room => {
+        this.room = room;
+        this.setupState();
+        this.bindGuestUserCreated();
+        this.bindEstimationCreated();
+        this.bindTaskUpdated();
+        this.setupForms();
+      });
     });
   }
 
@@ -105,7 +110,9 @@ export class RoomComponent implements OnInit {
   }
 
   getEstimation(id: number): EstimationModel {
-    return this.currentTask.estimations && this.currentTask.estimations.find(estimation => estimation.guestUserId === id);
+    return this.currentTask &&
+      this.currentTask.estimations &&
+      this.currentTask.estimations.find(estimation => estimation.guestUserId === id);
   }
 
   taskSelected($event: MouseEvent, task: TaskModel): void {

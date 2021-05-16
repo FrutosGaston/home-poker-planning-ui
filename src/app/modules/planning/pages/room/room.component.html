@@ -32,44 +32,44 @@
       <ng-container *ngIf="currentTask">
         <h3>{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
         <span *ngIf="currentTask.finalEstimation">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.finalEstimation } }}</span>
-
-        <div class="users-container">
-          <ng-container *ngFor="let user of usersInRoom; let i = index">
-            <mat-card class="user-card">
-              <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
-
-              <ng-container *ngIf="taskVotedByAll || taskDone && getEstimation(user.id)">
-                <strong>{{getEstimation(user.id).name}}</strong>
-              </ng-container>
-
-              <ng-container *ngIf="!taskVotedByAll && !taskDone">
-                <ng-container *ngIf="getEstimation(user.id)">
-                  <mat-icon class="done-icon" inline="true">done</mat-icon>
-                </ng-container>
-
-
-                <ng-container *ngIf="!getEstimation(user.id)">
-                  <ng-container *ngIf="!(user.id === loggedUser.id)">
-                    <mat-icon class="pending-icon" inline="true">pending</mat-icon>
-                  </ng-container>
-
-                  <form class="estimate-form" *ngIf="user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
-                    <mat-form-field class="form-field" appearance="outline">
-                      <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
-                      <input matInput formControlName="points" required autocomplete="off">
-                      <mat-error *ngIf="estimationForm.controls.points.touched && estimationForm.controls.points.invalid">
-                        <span *ngIf="estimationForm.controls.points.errors.required">{{ 'planning.room.points.mandatory' | translate }}</span>
-                      </mat-error>
-                    </mat-form-field>
-                    <button mat-raised-button color="primary" type="submit">{{ 'planning.room.estimate' | translate }}</button>
-                  </form>
-                </ng-container>
-              </ng-container>
-
-            </mat-card>
-          </ng-container>
-        </div>
       </ng-container>
+
+      <div class="users-container">
+        <ng-container *ngFor="let user of usersInRoom; let i = index">
+          <mat-card class="user-card">
+            <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
+
+            <ng-container *ngIf="taskVotedByAll || taskDone && getEstimation(user.id)">
+              <strong>{{getEstimation(user.id).name}}</strong>
+            </ng-container>
+
+            <ng-container *ngIf="!taskVotedByAll && !taskDone">
+              <ng-container *ngIf="getEstimation(user.id)">
+                <mat-icon class="done-icon" inline="true">done</mat-icon>
+              </ng-container>
+
+
+              <ng-container *ngIf="!getEstimation(user.id)">
+                <ng-container *ngIf="!currentTask || !(user.id === loggedUser.id)">
+                  <mat-icon class="pending-icon" inline="true">pending</mat-icon>
+                </ng-container>
+
+                <form class="estimate-form" *ngIf="currentTask && user.id === loggedUser.id" [formGroup]="estimationForm" (submit)="estimate()">
+                  <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
+                    <input matInput formControlName="points" required autocomplete="off">
+                    <mat-error *ngIf="estimationForm.controls.points.touched && estimationForm.controls.points.invalid">
+                      <span *ngIf="estimationForm.controls.points.errors.required">{{ 'planning.room.points.mandatory' | translate }}</span>
+                    </mat-error>
+                  </mat-form-field>
+                  <button mat-raised-button color="primary" type="submit">{{ 'planning.room.estimate' | translate }}</button>
+                </form>
+              </ng-container>
+            </ng-container>
+
+          </mat-card>
+        </ng-container>
+      </div>
 
       <form class="final-estimation-form" *ngIf="currentTask" [formGroup]="finalEstimationForm" (submit)="finalEstimation()">
         <mat-form-field class="form-field" appearance="outline">

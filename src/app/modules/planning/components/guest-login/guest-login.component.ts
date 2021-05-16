@@ -29,7 +29,7 @@ export class GuestLoginComponent implements OnInit {
     if (!this.guestForm.valid) {
       return;
     }
-    this.guestUserService.create(this.guestForm.value).subscribe(res => this.router.navigateByUrl('/room')
+    this.guestUserService.create(this.guestForm.value).subscribe(_ => this.router.navigateByUrl(`/room/${this.guestForm.value.roomId}`)
       , error => console.error(error));
   }
 

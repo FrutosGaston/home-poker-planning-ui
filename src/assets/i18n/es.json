@@ -21,6 +21,8 @@
   "planning.home.title": "Practica Planning Poker con tus compañeros!",
   "planning.home.subtitle": "Podrás crear una sala, elegir tu baraja de cartas favorita y comenzar a estimar todas tus tareas",
   "planning.home.join-room": "Unete a una sala",
+  "planning.home.join-room-button": "O unete a una!",
+  "planning.home.create-room": "Crea una sala",
   "planning.home.create-room-button": "O crea una nueva!",
   "planning.home.room-form": "Crear sala",
   "planning.home.room-form.title": "Título",

@@ -32,6 +32,7 @@ import { CreateRoomComponent } from './modules/planning/components/create-room/c
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
   { path: 'room', component: RoomComponent },
+  { path: 'room/:id', component: RoomComponent },
 ];
 
 @NgModule({
