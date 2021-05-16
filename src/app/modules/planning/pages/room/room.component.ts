@@ -17,7 +17,6 @@ import {ActivatedRoute} from '@angular/router';
 export class RoomComponent implements OnInit {
   loggedUser: GuestUserModel;
   usersInRoom: GuestUserModel[];
-  estimationForm: FormGroup;
   finalEstimationForm: FormGroup;
   currentTask: TaskModel;
   taskVotedByAll = false;
@@ -74,9 +73,6 @@ export class RoomComponent implements OnInit {
   }
 
   private setupForms(): void {
-    this.estimationForm = this.formBuilder.group({
-      points: [null, [Validators.required]],
-    });
     this.finalEstimationForm = this.formBuilder.group({
       points: [null, [Validators.required]],
     });
@@ -84,15 +80,6 @@ export class RoomComponent implements OnInit {
 
   private getCurrentTask(): TaskModel {
     return this.tasks.find(task => !task.done()) || this.tasks[0];
-  }
-
-  estimate(): void {
-    if (!this.estimationForm.valid) { return; }
-    const estimation = new EstimationModel();
-    estimation.guestUserId = this.loggedUser.id;
-    estimation.taskId = this.currentTask.id;
-    estimation.name = this.estimationForm.value.points;
-    this.taskService.estimate(estimation).subscribe(_ => {});
   }
 
   finalEstimation(): void {
@@ -119,7 +106,6 @@ export class RoomComponent implements OnInit {
     this.currentTask = task;
     this.updateTaskState();
     this.finalEstimationForm.reset();
-    this.estimationForm.reset();
   }
 
   private bindGuestUserCreated(): void {

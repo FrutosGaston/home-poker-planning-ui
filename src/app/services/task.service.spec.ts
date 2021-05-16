@@ -57,7 +57,7 @@ it('should create and estimation ', () => {
 
   httpClientSpy.post.and.returnValue(of(estimationId));
 
-  taskService.estimate(estimation).subscribe(returnedEstimationId => expect(returnedEstimationId).toEqual(estimationId));
+  taskService.create(estimation).subscribe(returnedEstimationId => expect(returnedEstimationId).toEqual(estimationId));
 
   expect(httpClientSpy.post.calls.count()).toBe(1, 'one call');
 });

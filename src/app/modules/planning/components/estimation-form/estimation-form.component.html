@@ -1,0 +1,10 @@
+<form class="estimate-form" [formGroup]="estimationForm" (submit)="estimate()">
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label>{{ 'planning.room.points.label' | translate }}</mat-label>
+    <input matInput formControlName="points" required autocomplete="off">
+    <mat-error *ngIf="estimationForm.controls.points.touched && estimationForm.controls.points.invalid">
+      <span *ngIf="estimationForm.controls.points.errors.required">{{ 'planning.room.points.mandatory' | translate }}</span>
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary" type="submit">{{ 'planning.room.estimate' | translate }}</button>
+</form>

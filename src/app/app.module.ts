@@ -28,6 +28,7 @@ import {AbstractShapeComponent} from './util/abstract-shape/abstract-shape.compo
 import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@stomp/ng2-stompjs';
 import {myRxStompConfig} from './my-rx-stomp.config';
 import { CreateRoomComponent } from './modules/planning/components/create-room/create-room.component';
+import { EstimationFormComponent } from './modules/planning/components/estimation-form/estimation-form.component';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -43,7 +44,8 @@ const routes: Routes = [
     GuestLoginComponent,
     RoomComponent,
     AbstractShapeComponent,
-    CreateRoomComponent
+    CreateRoomComponent,
+    EstimationFormComponent
   ],
   imports: [
     BrowserModule,

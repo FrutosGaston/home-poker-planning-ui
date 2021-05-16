@@ -24,7 +24,7 @@ export class TaskService {
                                       );
   }
 
-  estimate(estimation: EstimationModel): Observable<number> {
+  create(estimation: EstimationModel): Observable<number> {
     const headers = { 'content-type': 'application/json'};
     const body = JSON.stringify(estimation);
     return this.http.post<number>(`${this.baseURL}/estimations`, body, { headers })
