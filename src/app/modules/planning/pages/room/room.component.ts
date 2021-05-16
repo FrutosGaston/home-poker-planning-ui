@@ -18,6 +18,7 @@ export class RoomComponent implements OnInit {
   loggedUser: GuestUserModel;
   usersInRoom: GuestUserModel[];
   finalEstimationForm: FormGroup;
+  taskForm: FormGroup;
   currentTask: TaskModel;
   taskVotedByAll = false;
   tasks: TaskModel[];
@@ -40,6 +41,7 @@ export class RoomComponent implements OnInit {
         this.setupState();
         this.bindGuestUserCreated();
         this.bindEstimationCreated();
+        this.bindTaskCreated();
         this.bindTaskUpdated();
         this.setupForms();
       });
@@ -59,6 +61,7 @@ export class RoomComponent implements OnInit {
   }
 
   private updateTaskState(): void {
+    if (!this.currentTask) { return; }
     this.taskDone = this.currentTask.done();
     this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom);
   }
@@ -75,6 +78,9 @@ export class RoomComponent implements OnInit {
   private setupForms(): void {
     this.finalEstimationForm = this.formBuilder.group({
       points: [null, [Validators.required]],
+    });
+    this.taskForm = this.formBuilder.group({
+      title: [null, [Validators.required]],
     });
   }
 
@@ -123,6 +129,14 @@ export class RoomComponent implements OnInit {
     });
   }
 
+  private bindTaskCreated(): void {
+    this.taskService.onNewTask(this.getRoomId()).subscribe((task) => {
+      this.tasks.push(task);
+      this.setCurrentTask();
+      this.updateTaskState();
+    });
+  }
+
   private bindTaskUpdated(): void {
     this.taskService.onTaskUpdated(this.getRoomId()).subscribe((updatedTask) => {
       const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.id);
@@ -135,5 +149,11 @@ export class RoomComponent implements OnInit {
 
   private getRoomId(): number {
     return this.room.id;
+  }
+
+  createTask(): void {
+    if (!this.taskForm.valid) { return; }
+    const task: TaskModel = { title: this.taskForm.value.title, roomId: this.room.id } as TaskModel;
+    this.taskService.create(task).subscribe(_ => this.taskForm.reset());
   }
 }

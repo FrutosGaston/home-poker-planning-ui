@@ -24,10 +24,17 @@ export class TaskService {
                                       );
   }
 
-  create(estimation: EstimationModel): Observable<number> {
+  estimate(estimation: EstimationModel): Observable<number> {
     const headers = { 'content-type': 'application/json'};
     const body = JSON.stringify(estimation);
     return this.http.post<number>(`${this.baseURL}/estimations`, body, { headers })
+      .pipe(take(1));
+  }
+
+  create(task: TaskModel): Observable<number> {
+    const headers = { 'content-type': 'application/json'};
+    const body = JSON.stringify(task);
+    return this.http.post<number>(this.baseURL, body, { headers })
       .pipe(take(1));
   }
 
@@ -50,4 +57,9 @@ export class TaskService {
     );
   }
 
+  onNewTask(roomId: number): Observable<TaskModel> {
+    return this.rxStompService.watch(`/room/${roomId}/tasks/created`).pipe(
+      map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
+    );
+  }
 }

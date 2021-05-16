@@ -39,7 +39,7 @@ export class EstimationFormComponent implements OnInit {
     estimation.guestUserId = this.guestUserId;
     estimation.taskId = this.taskId;
     estimation.name = this.estimationForm.value.points;
-    this.taskService.create(estimation).subscribe(_ => {});
+    this.taskService.estimate(estimation).subscribe(_ => {});
   }
 
 }

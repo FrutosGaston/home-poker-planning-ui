@@ -31,5 +31,8 @@
   "planning.home.room-form.title.max": "El título no puede tener más de 20 caracteres.",
   "planning.home.room-form.description": "Descripción",
   "planning.home.room-form.description.max": "La descripción no puede tener más de 255 caracteres.",
-  "planning.home.room-form.submit": "Iniciar"
+  "planning.home.room-form.submit": "Iniciar",
+  "planning.room.task-title.label": "Título",
+  "planning.room.task-title.mandatory": "Este campo es obligatorio.",
+  "planning.room.create-task": "Crear tarea"
 }

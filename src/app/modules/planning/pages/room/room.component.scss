@@ -75,3 +75,13 @@ mat-sidenav-content {
 .color-8 { color: #666633 }
 .color-9 { color: #006666 }
 
+
+.create-task-form {
+  display: flex;
+  flex-direction: column;
+  margin: 12px;
+}
+
+.sidenav {
+  width: 33%;
+}
