@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {GuestUserModel} from '../models/GuestUser.model';
 import {map, take, tap} from 'rxjs/operators';
 import {RxStompService} from '@stomp/ng2-stompjs';
 import {Message} from '@stomp/stompjs';
 import {CaseConverter} from '../util/case-converter';
-import {EstimationModel} from '../models/Task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +13,6 @@ import {EstimationModel} from '../models/Task.model';
 export class GuestUserService {
 
   baseURL = 'http://localhost:8080/api/v1/guest-users/';
-  // tslint:disable-next-line:variable-name
-  private _loggedGuestUser: GuestUserModel;
 
   constructor(private http: HttpClient, private rxStompService: RxStompService) {}
 
@@ -26,7 +23,7 @@ export class GuestUserService {
     return this.http.post<number>(`${this.baseURL}`, body, { headers })
       .pipe(take(1), tap(id => {
         guestUser.id = id;
-        this._loggedGuestUser = guestUser;
+        sessionStorage.setItem('loggedUser', JSON.stringify(guestUser));
       }));
   }
 
@@ -45,7 +42,7 @@ export class GuestUserService {
   }
 
   get loggedGuestUser(): GuestUserModel {
-    return this._loggedGuestUser;
+    return JSON.parse(sessionStorage.getItem('loggedUser'));
   }
 
 }

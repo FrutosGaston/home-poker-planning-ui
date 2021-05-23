@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
-import {EstimationModel, TaskModel} from '../models/Task.model';
+import {TaskModel} from '../models/Task.model';
 import {Message} from '@stomp/stompjs';
 import {RxStompService} from '@stomp/ng2-stompjs';
 import {CaseConverter} from '../util/case-converter';
+import {EstimationModel} from '../models/Estimation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,13 @@ export class TaskService {
       .pipe(take(1));
   }
 
+  estimateFinal(estimation: EstimationModel): Observable<number> {
+    const headers = { 'content-type': 'application/json'};
+    const body = JSON.stringify(estimation);
+    return this.http.post<number>(`${this.baseURL}/final-estimations`, body, { headers })
+      .pipe(take(1));
+  }
+
   create(task: TaskModel): Observable<number> {
     const headers = { 'content-type': 'application/json'};
     const body = JSON.stringify(task);
@@ -51,8 +59,8 @@ export class TaskService {
     );
   }
 
-  onTaskUpdated(roomId: number): Observable<TaskModel> {
-    return this.rxStompService.watch(`/room/${roomId}/tasks/updated`).pipe(
+  onTaskEstimated(roomId: number): Observable<TaskModel> {
+    return this.rxStompService.watch(`/room/${roomId}/tasks/estimated`).pipe(
       map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
     );
   }

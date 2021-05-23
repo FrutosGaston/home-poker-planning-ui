@@ -8,7 +8,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -29,6 +29,8 @@ import {InjectableRxStompConfig, RxStompService, rxStompServiceFactory} from '@s
 import {myRxStompConfig} from './my-rx-stomp.config';
 import { CreateRoomComponent } from './modules/planning/components/create-room/create-room.component';
 import { EstimationFormComponent } from './modules/planning/components/estimation-form/estimation-form.component';
+import {MatSelectModule} from '@angular/material/select';
+import { TaskListComponent } from './modules/planning/components/task-list/task-list.component';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -45,7 +47,8 @@ const routes: Routes = [
     RoomComponent,
     AbstractShapeComponent,
     CreateRoomComponent,
-    EstimationFormComponent
+    EstimationFormComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
@@ -63,17 +66,19 @@ const routes: Routes = [
     MatSlideToggleModule,
     MatSidenavModule,
     MatListModule,
+    MatSelectModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: (http: HttpClient) => {
           return new TranslateHttpLoader(http);
         },
-        deps: [ HttpClient ]
+        deps: [HttpClient]
       }
-    })
+    }),
   ],
   exports: [RouterModule],
   providers: [

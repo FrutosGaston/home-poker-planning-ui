@@ -5,6 +5,8 @@ import {RoomService} from '../../../../services/room.service';
 import {GuestUserService} from '../../../../services/guest-user.service';
 import {RoomModel} from '../../../../models/Room.model';
 import {GuestUserModel} from '../../../../models/GuestUser.model';
+import {DeckModel} from '../../../../models/Deck.model';
+import {DeckService} from '../../../../services/deck.service';
 
 @Component({
   selector: 'app-create-room',
@@ -14,18 +16,23 @@ import {GuestUserModel} from '../../../../models/GuestUser.model';
 export class CreateRoomComponent implements OnInit {
 
   roomForm: FormGroup;
+  decks: DeckModel[];
+  selectedDeckId: number;
 
   constructor(
     private formBuilder: FormBuilder,
     private roomService: RoomService,
+    private deckService: DeckService,
     private guestUserService: GuestUserService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.deckService.findDecks().subscribe(decks => this.decks = decks);
     this.roomForm = this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
       title: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      deck: [null, [Validators.required]],
       description: [null, [Validators.maxLength(255)]]
     });
   }
@@ -35,7 +42,7 @@ export class CreateRoomComponent implements OnInit {
       return;
     }
     const formValues = this.roomForm.value;
-    this.roomService.create({ title: formValues.title, description: formValues.description } as RoomModel).subscribe(roomId => {
+    this.roomService.create({ title: formValues.title, description: formValues.description, deckId: formValues.deck } as RoomModel).subscribe(roomId => {
         this.guestUserService.create({ name: formValues.name, roomId } as GuestUserModel)
           .subscribe(res => this.router.navigateByUrl(`/room/${roomId}`));
       }

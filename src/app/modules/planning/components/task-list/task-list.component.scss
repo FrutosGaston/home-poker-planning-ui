@@ -1,0 +1,17 @@
+@import "src/styles.scss";
+
+.create-task-form {
+  display: flex;
+  flex-direction: column;
+  margin: 12px;
+}
+
+.done-icon {
+  background-color: mat-color($cyan, 500);
+  border-radius: 9px;
+  margin-left: 4px;
+  min-width: 24px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}

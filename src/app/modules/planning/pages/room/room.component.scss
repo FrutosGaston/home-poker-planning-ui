@@ -41,15 +41,6 @@ mat-sidenav-content {
   color: #404040;
 }
 
-.done-icon {
-  color: #4ac64a;
-
-  &.task-list-icon {
-    height: 24px;
-    font-size: 24px;
-  }
-}
-
 .toggle-button {
   font-size: 24px;
 }
@@ -74,13 +65,6 @@ mat-sidenav-content {
 .color-7 { color: #666699 }
 .color-8 { color: #666633 }
 .color-9 { color: #006666 }
-
-
-.create-task-form {
-  display: flex;
-  flex-direction: column;
-  margin: 12px;
-}
 
 .sidenav {
   width: 33%;

@@ -6,25 +6,11 @@
 
   <mat-sidenav #sidenav mode="over" class="sidenav">
     <mat-nav-list>
-      <a mat-list-item *ngFor="let task of tasks" (click)="taskSelected($event, task); sidenav.close()"
-      class="task-list-element {{task.id == currentTask.id ? 'selected-task-list' : ''}}">
-        <span>{{task.title}}</span>
-        <ng-container *ngIf="task.done()">
-          <mat-icon class="done-icon task-list-icon" inline="true">done</mat-icon>
-        </ng-container>
-      </a>
-      <mat-divider></mat-divider>
-      <form class="create-task-form" *ngIf="taskForm" [formGroup]="taskForm" (submit)="createTask()">
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>{{ 'planning.room.task-title.label' | translate }}</mat-label>
-          <input matInput formControlName="title" required autocomplete="off">
-          <mat-error *ngIf="taskForm.controls.title.touched && taskForm.controls.title.invalid">
-            <span *ngIf="taskForm.controls.title.errors && taskForm.controls.title.errors.required">
-              {{ 'planning.room.task-title.mandatory' | translate }}</span>
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">{{ 'planning.room.create-task' | translate }}</button>
-      </form>
+      <app-task-list (taskSelectedEvent)="taskSelected($event)"
+                     [currentTask]="currentTask"
+                     [tasks]="tasks"
+                     [roomId]="room && room.id"
+                     [sidenav]="sidenav"></app-task-list>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -42,7 +28,7 @@
 
       <ng-container *ngIf="currentTask">
         <h3>{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
-        <span *ngIf="currentTask.finalEstimation">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.finalEstimation } }}</span>
+        <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>
       </ng-container>
 
       <div class="users-container">
@@ -51,7 +37,7 @@
             <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
 
             <ng-container *ngIf="taskVotedByAll || taskDone && getEstimation(user.id)">
-              <strong>{{getEstimation(user.id).name}}</strong>
+              <strong>{{getEstimation(user.id) && getEstimation(user.id).card && getEstimation(user.id).card.value}}</strong>
             </ng-container>
 
             <ng-container *ngIf="!taskVotedByAll && !taskDone">
@@ -66,7 +52,7 @@
                 </ng-container>
 
                 <ng-container *ngIf="currentTask && user.id === loggedUser.id">
-                  <app-estimation-form [guestUserId]="loggedUser.id" [taskId]="currentTask.id"></app-estimation-form>
+                  <app-estimation-form [deckId]="room.deckId" [guestUserId]="loggedUser.id" [taskId]="currentTask.id"></app-estimation-form>
                 </ng-container>
               </ng-container>
             </ng-container>
@@ -75,17 +61,7 @@
         </ng-container>
       </div>
 
-      <form class="final-estimation-form" *ngIf="currentTask" [formGroup]="finalEstimationForm" (submit)="finalEstimation()">
-        <mat-form-field class="form-field" appearance="outline">
-          <mat-label>{{ 'planning.room.final-estimation.label' | translate }}</mat-label>
-          <input matInput formControlName="points" required autocomplete="off">
-          <mat-error *ngIf="finalEstimationForm.controls.points.touched && finalEstimationForm.controls.points.invalid">
-            <span *ngIf="finalEstimationForm.controls.points.errors && finalEstimationForm.controls.points.errors.required">
-              {{ 'planning.room.points.mandatory' | translate }}</span>
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">{{ 'planning.room.estimate' | translate }}</button>
-      </form>
+      <app-estimation-form *ngIf="currentTask" class="final-estimation-form" isFinal="true" [deckId]="room.deckId" [guestUserId]="loggedUser.id" [taskId]="currentTask.id"></app-estimation-form>
     </div>
 
   </mat-sidenav-content>

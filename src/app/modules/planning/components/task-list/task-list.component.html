@@ -1,0 +1,23 @@
+<ng-container>
+  <a mat-list-item *ngFor="let task of tasks" (click)="taskSelected($event, task); sidenav.close()"
+     class="task-list-element {{task.id == currentTask.id ? 'selected-task-list' : ''}}">
+    <span>{{task.title}}</span>
+    <ng-container *ngIf="task.estimation && task.estimation.card">
+      <div class="done-icon task-list-icon">{{task.estimation.card.value}}</div>
+    </ng-container>
+  </a>
+
+  <mat-divider></mat-divider>
+
+  <form class="create-task-form" *ngIf="taskForm" [formGroup]="taskForm" (submit)="createTask()">
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label>{{ 'planning.room.task-title.label' | translate }}</mat-label>
+      <input matInput formControlName="title" required autocomplete="off">
+      <mat-error *ngIf="taskForm.controls.title.touched && taskForm.controls.title.invalid">
+          <span *ngIf="taskForm.controls.title.errors && taskForm.controls.title.errors.required">
+            {{ 'planning.room.task-title.mandatory' | translate }}</span>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">{{ 'planning.room.create-task' | translate }}</button>
+  </form>
+</ng-container>

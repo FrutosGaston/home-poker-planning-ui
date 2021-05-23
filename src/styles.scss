@@ -59,7 +59,7 @@ body {
   margin: 0;
 }
 
-.mat-menu-item:hover {
+.mat-menu-item:hover, .task-list-element:hover {
   background: mat-color($accent, lighter) !important;
 }
 

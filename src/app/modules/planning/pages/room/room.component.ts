@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GuestUserService} from '../../../../services/guest-user.service';
 import {GuestUserModel} from '../../../../models/GuestUser.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../../../../services/task.service';
-import {EstimationModel, TaskModel} from '../../../../models/Task.model';
+import {TaskModel} from '../../../../models/Task.model';
 import {combineLatest} from 'rxjs';
 import {RoomService} from '../../../../services/room.service';
 import {RoomModel} from '../../../../models/Room.model';
 import {ActivatedRoute} from '@angular/router';
+import {EstimationModel} from '../../../../models/Estimation.model';
 
 @Component({
   selector: 'app-room',
@@ -17,8 +17,6 @@ import {ActivatedRoute} from '@angular/router';
 export class RoomComponent implements OnInit {
   loggedUser: GuestUserModel;
   usersInRoom: GuestUserModel[];
-  finalEstimationForm: FormGroup;
-  taskForm: FormGroup;
   currentTask: TaskModel;
   taskVotedByAll = false;
   tasks: TaskModel[];
@@ -28,30 +26,26 @@ export class RoomComponent implements OnInit {
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
               private roomService: RoomService,
-              private route: ActivatedRoute,
-              private formBuilder: FormBuilder) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loggedUser = this.guestUserService.loggedGuestUser || this.fakeUser();
+    this.loggedUser = this.guestUserService.loggedGuestUser;
     if (!this.loggedUser) { return; }
+
     this.route.params.subscribe(params => {
       const roomId = params.id || this.loggedUser.roomId;
       this.roomService.get(roomId).subscribe(room => {
         this.room = room;
         this.setupState();
-        this.bindGuestUserCreated();
-        this.bindEstimationCreated();
-        this.bindTaskCreated();
-        this.bindTaskUpdated();
-        this.setupForms();
+        this.bindEvents();
       });
     });
   }
 
   private setupState(): void {
-    const currentRoom = this.getRoomId();
-    const users$ = this.guestUserService.findByRoom(currentRoom);
-    const tasks$ = this.taskService.getByRoom(currentRoom);
+    const currentRoomId = this.getRoomId();
+    const users$ = this.guestUserService.findByRoom(currentRoomId);
+    const tasks$ = this.taskService.getByRoom(currentRoomId);
 
     combineLatest([users$, tasks$]).subscribe(results => {
       this.usersInRoom = results[0];
@@ -75,31 +69,8 @@ export class RoomComponent implements OnInit {
     this.updateTaskState();
   }
 
-  private setupForms(): void {
-    this.finalEstimationForm = this.formBuilder.group({
-      points: [null, [Validators.required]],
-    });
-    this.taskForm = this.formBuilder.group({
-      title: [null, [Validators.required]],
-    });
-  }
-
   private getCurrentTask(): TaskModel {
     return this.tasks.find(task => !task.done()) || this.tasks[0];
-  }
-
-  finalEstimation(): void {
-    if (!this.finalEstimationForm.valid) { return; }
-    this.currentTask.finalEstimation = this.finalEstimationForm.value.points;
-    this.taskService.updateTask(this.currentTask).subscribe(_ => {});
-  }
-
-  private fakeUser(): GuestUserModel {
-    const fakeUser = new GuestUserModel();
-    fakeUser.roomId = 1;
-    fakeUser.name = 'Gaston';
-    fakeUser.id = 34;
-    return fakeUser;
   }
 
   getEstimation(id: number): EstimationModel {
@@ -108,10 +79,9 @@ export class RoomComponent implements OnInit {
       this.currentTask.estimations.find(estimation => estimation.guestUserId === id);
   }
 
-  taskSelected($event: MouseEvent, task: TaskModel): void {
+  taskSelected(task: TaskModel): void {
     this.currentTask = task;
     this.updateTaskState();
-    this.finalEstimationForm.reset();
   }
 
   private bindGuestUserCreated(): void {
@@ -138,11 +108,10 @@ export class RoomComponent implements OnInit {
   }
 
   private bindTaskUpdated(): void {
-    this.taskService.onTaskUpdated(this.getRoomId()).subscribe((updatedTask) => {
+    this.taskService.onTaskEstimated(this.getRoomId()).subscribe((updatedTask) => {
       const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.id);
       const taskToUpdate = this.tasks[taskIndex];
-      taskToUpdate.finalEstimation = updatedTask.finalEstimation;
-      taskToUpdate.title = updatedTask.title;
+      taskToUpdate.estimation = updatedTask.estimation;
       this.updateTaskState();
     });
   }
@@ -151,9 +120,10 @@ export class RoomComponent implements OnInit {
     return this.room.id;
   }
 
-  createTask(): void {
-    if (!this.taskForm.valid) { return; }
-    const task: TaskModel = { title: this.taskForm.value.title, roomId: this.room.id } as TaskModel;
-    this.taskService.create(task).subscribe(_ => this.taskForm.reset());
+  private bindEvents(): void {
+    this.bindGuestUserCreated();
+    this.bindEstimationCreated();
+    this.bindTaskCreated();
+    this.bindTaskUpdated();
   }
 }

@@ -26,6 +26,17 @@
           <span *ngIf="roomForm.controls.description.errors.maxLength">{{ 'planning.home.room-form.description.max' | translate }}</span>
         </mat-error>
       </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>{{ 'planning.home.room-form.deck' | translate }}</mat-label>
+        <mat-select formControlName="deck" required>
+          <mat-option *ngFor="let deck of decks" [value]="deck.id">
+            {{deck.printCards()}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="roomForm.controls.deck.touched && roomForm.controls.deck.invalid">
+          <span *ngIf="roomForm.controls.title.errors.required">{{ 'planning.home.room-form.deck.mandatory' | translate }}</span>
+        </mat-error>
+      </mat-form-field>
       <button mat-raised-button color="primary" type="submit">{{ 'planning.home.room-form.submit' | translate }}</button>
     </form>
   </div>

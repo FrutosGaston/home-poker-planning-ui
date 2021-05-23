@@ -1,18 +1,11 @@
 import {GuestUserModel} from './GuestUser.model';
-
-export class EstimationModel {
-  id?: number;
-  name: string;
-  guestUserId: number;
-  taskId: number;
-  createdAt?: Date;
-}
+import {EstimationModel} from './Estimation.model';
 
 export class TaskModel {
   id?: number;
   roomId?: number;
   title: string;
-  finalEstimation?: string;
+  estimation?: EstimationModel;
   estimations?: EstimationModel[];
   createdAt?: Date;
 
@@ -21,7 +14,7 @@ export class TaskModel {
     this.roomId = task.roomId;
     this.title = task.title;
     this.estimations = task.estimations;
-    this.finalEstimation = task.finalEstimation;
+    this.estimation = task.estimation;
     this.createdAt = task.createdAt;
   }
 
@@ -34,6 +27,6 @@ export class TaskModel {
   }
 
   done(): boolean {
-    return !!this.finalEstimation;
+    return !!this.estimation;
   }
 }
