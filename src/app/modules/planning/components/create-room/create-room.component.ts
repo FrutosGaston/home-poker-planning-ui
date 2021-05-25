@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {RoomService} from '../../../../services/room.service';
 import {GuestUserService} from '../../../../services/guest-user.service';
-import {RoomModel} from '../../../../models/Room.model';
 import {GuestUserModel} from '../../../../models/GuestUser.model';
 import {DeckModel} from '../../../../models/Deck.model';
 import {DeckService} from '../../../../services/deck.service';
@@ -42,7 +41,7 @@ export class CreateRoomComponent implements OnInit {
       return;
     }
     const formValues = this.roomForm.value;
-    this.roomService.create({ title: formValues.title, description: formValues.description, deckId: formValues.deck } as RoomModel).subscribe(roomId => {
+    this.roomService.create({ title: formValues.title, description: formValues.description, deckId: formValues.deck }).subscribe(roomId => {
         this.guestUserService.create({ name: formValues.name, roomId } as GuestUserModel)
           .subscribe(res => this.router.navigateByUrl(`/room/${roomId}`));
       }

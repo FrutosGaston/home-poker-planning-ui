@@ -31,7 +31,7 @@ describe('GuestLoginComponent', () => {
       .then(() => {
         fixture = TestBed.createComponent(GuestLoginComponent);
         component = fixture.componentInstance;
-        jasmine.createSpyObj('GuestUserService', ['create'])
+        jasmine.createSpyObj('GuestUserService', ['create']);
         guestUserServiceSpy.create.and.returnValue(of());
         fixture.detectChanges();
         nameField = component.guestForm.controls.name;

@@ -1,8 +1,8 @@
-import {EstimationModel, TaskModel} from '../models/Task.model';
+import {TaskModel} from '../models/Task.model';
 import {of, throwError} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {TaskService} from './task.service';
-import {GuestUserService} from './guest-user.service';
+import {EstimationModel} from '../models/Estimation.model';
 
 let httpClientSpy: { get: jasmine.Spy, post: jasmine.Spy, patch: jasmine.Spy };
 let rxStompService: { watch: jasmine.Spy };
