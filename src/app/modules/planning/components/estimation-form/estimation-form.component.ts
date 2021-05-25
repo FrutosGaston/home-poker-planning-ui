@@ -1,20 +1,44 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../../../../services/task.service';
 import {DeckModel} from '../../../../models/Deck.model';
 import {DeckService} from '../../../../services/deck.service';
 import {EstimationModel} from '../../../../models/Estimation.model';
+import {CardModel} from '../../../../models/Card.model';
+import {DragScrollComponent} from 'ngx-drag-scroll';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-estimation-form',
   templateUrl: './estimation-form.component.html',
-  styleUrls: ['./estimation-form.component.scss']
+  styleUrls: ['./estimation-form.component.scss'],
+  animations: [
+    trigger('slideDown', [
+      transition('closed=>opened', [
+        style({bottom: '0'}),
+        animate('700ms ease-in', style({bottom: '290px'}))
+      ]),
+      transition('opened=>closed', [
+        style({bottom: '290px'}),
+        animate('700ms ease-in', style({bottom: '0'}))
+      ]),
+      transition(':enter', [
+        style({transform: 'translateY(100%)'}),
+        animate('700ms ease-in', style({transform: 'translateY(0%)'}))
+      ]),
+      transition(':leave', [
+        animate('700ms ease-in', style({transform: 'translateY(100%)'}))
+      ])
+    ])
+  ]
 })
 export class EstimationFormComponent implements OnInit {
   estimationForm: FormGroup;
+  state: string;
   @Input() guestUserId: number;
   @Input() deckId: number;
   @Input() isFinal: boolean;
+  @ViewChild('cardscroll', {read: DragScrollComponent}) ds: DragScrollComponent;
 
   // tslint:disable-next-line:variable-name
   _taskId: number;
@@ -23,6 +47,14 @@ export class EstimationFormComponent implements OnInit {
   constructor(private taskService: TaskService,
               private deckService: DeckService,
               private formBuilder: FormBuilder) { }
+
+  @Input() set open(show: boolean) {
+    this.state = show ? 'opened' : 'closed';
+  }
+
+  get open(): boolean {
+    return this.state === 'opened';
+  }
 
   @Input() set taskId(taskId: number) {
     this._taskId = taskId;
@@ -46,11 +78,27 @@ export class EstimationFormComponent implements OnInit {
     estimation.guestUserId = this.guestUserId;
     estimation.taskId = this.taskId;
     estimation.cardId = this.estimationForm.value.cardId;
-    if (this.isFinal) {
-      this.taskService.estimateFinal(estimation).subscribe(_ => {});
-    } else {
-      this.taskService.estimate(estimation).subscribe(_ => {});
-    }
+    this.taskService.estimateFinal(estimation).subscribe(_ => {});
+  }
+
+  cardSelected(card: CardModel): void {
+    const estimation = new EstimationModel();
+    estimation.guestUserId = this.guestUserId;
+    estimation.taskId = this.taskId;
+    estimation.cardId = card.id;
+    this.taskService.estimate(estimation).subscribe(_ => {});
+  }
+
+  toggle(): void {
+    this.state = this.state === 'opened' ? 'closed' : 'opened';
+  }
+
+  moveLeft(): void {
+    this.ds.moveLeft();
+  }
+
+  moveRight(): void {
+    this.ds.moveRight();
   }
 
 }

@@ -26,6 +26,7 @@
     "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/stompjs": "^6.1.0",
     "material-design-icons": "^3.0.1",
+    "ngx-drag-scroll": "11.0.0-beta.1",
     "rxjs": "~6.6.0",
     "sockjs-client": "^1.5.1",
     "tslib": "^2.0.0",

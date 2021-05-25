@@ -69,3 +69,13 @@ mat-sidenav-content {
 .sidenav {
   width: 33%;
 }
+
+.done-icon {
+  background-color: mat-color($cyan, 500);
+  border-radius: 9px;
+  margin-left: 4px;
+  min-width: 24px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}

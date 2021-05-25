@@ -31,6 +31,7 @@ import { CreateRoomComponent } from './modules/planning/components/create-room/c
 import { EstimationFormComponent } from './modules/planning/components/estimation-form/estimation-form.component';
 import {MatSelectModule} from '@angular/material/select';
 import { TaskListComponent } from './modules/planning/components/task-list/task-list.component';
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -70,6 +71,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    DragScrollModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

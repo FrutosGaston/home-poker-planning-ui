@@ -22,6 +22,7 @@ export class RoomComponent implements OnInit {
   tasks: TaskModel[];
   taskDone: boolean;
   room: RoomModel;
+  showEstimation = false;
 
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
@@ -125,5 +126,9 @@ export class RoomComponent implements OnInit {
     this.bindEstimationCreated();
     this.bindTaskCreated();
     this.bindTaskUpdated();
+  }
+
+  toggleEstimation(): void {
+    this.showEstimation = !this.showEstimation;
   }
 }

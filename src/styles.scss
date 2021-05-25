@@ -152,3 +152,9 @@ mat-sidenav {
   overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
+
+.estimation-carousel {
+  .drag-scroll-content {
+    overflow: hidden !important;
+  }
+}

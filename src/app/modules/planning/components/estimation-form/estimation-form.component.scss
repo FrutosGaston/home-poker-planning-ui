@@ -1,5 +1,104 @@
+@import "src/styles";
+
 .estimate-form {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+drag-scroll {
+  width: calc(100% - 30px);
+  margin-left: 15px;
+}
+
+.estimation-carousel-container {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.estimation-card {
+  cursor: pointer;
+  height: 230px;
+  width: 200px;
+  margin: 12px;
+  border-radius: 30px;
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 25%);
+}
+
+.move-button {
+  cursor: pointer;
+  height: 290px;
+  width: 75px;
+  position: fixed;
+  bottom: 0;
+  background-color: #3e3e3e3b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #3e3e3edb;
+  }
+
+  mat-icon {
+    font-size: 100px;
+    width: 100px;
+    height: 75px;
+    user-select: none;
+  }
+}
+
+.move-next-button {
+  right: 15px;
+}
+
+.move-back-button {
+  left: 0;
+}
+
+.card-value {
+  color: mat-color($cyan, 500);
+  font-size: 140px;
+  user-select: none;
+}
+
+.estimation-card-content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 100%;;
+}
+
+.toggle-button {
+  cursor: pointer;
+  height: 45px;
+  width: calc(100% - 15px);
+  position: fixed;
+  background-color: #3e3e3e3b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+
+  &:hover {
+    background-color: #3e3e3edb;
+  }
+
+  mat-icon {
+    font-size: 100px;
+    width: 100px;
+    height: 98px;
+    user-select: none;
+  }
+
+  &.open {
+    bottom: 290px;
+  }
+
+  &.close {
+    bottom: 0;
+  }
 }
