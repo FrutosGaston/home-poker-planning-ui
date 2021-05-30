@@ -32,6 +32,12 @@ export class TaskService {
       .pipe(take(1));
   }
 
+  invalidateEstimations(taskId: number): Observable<number> {
+    const headers = { 'content-type': 'application/json'};
+    return this.http.delete<number>(`${this.baseURL}/${taskId}/estimations`, { headers })
+      .pipe(take(1));
+  }
+
   estimateFinal(estimation: EstimationModel): Observable<number> {
     const headers = { 'content-type': 'application/json'};
     const body = JSON.stringify(estimation);
@@ -67,6 +73,12 @@ export class TaskService {
 
   onNewTask(roomId: number): Observable<TaskModel> {
     return this.rxStompService.watch(`/room/${roomId}/tasks/created`).pipe(
+      map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
+    );
+  }
+
+  onEstimationsInvalidated(roomId: number): Observable<TaskModel> {
+    return this.rxStompService.watch(`/room/${roomId}/tasks/estimations/invalidatedAll`).pipe(
       map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
     );
   }

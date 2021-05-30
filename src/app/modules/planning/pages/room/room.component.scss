@@ -79,3 +79,8 @@ mat-sidenav-content {
   font-size: 20px;
   font-weight: bold;
 }
+
+.task-title-container {
+  display: flex;
+  justify-content: space-between;
+}

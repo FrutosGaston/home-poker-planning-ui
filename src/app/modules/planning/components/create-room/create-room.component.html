@@ -30,7 +30,7 @@
         <mat-label>{{ 'planning.home.room-form.deck' | translate }}</mat-label>
         <mat-select formControlName="deck" required>
           <mat-option *ngFor="let deck of decks" [value]="deck.id">
-            {{deck.printCards()}}
+            {{deck.name + ' - ' + deck.printCards()}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="roomForm.controls.deck.touched && roomForm.controls.deck.invalid">

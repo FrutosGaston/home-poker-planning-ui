@@ -16,6 +16,7 @@
   "planning.room.estimate": "Estimar",
   "planning.room.task.title": "Estimando la tarea: {{title}}",
   "planning.room.taskList.button": "Tareas",
+  "planning.room.reset.button": "Reiniciar estimaciones",
   "planning.room.final-estimation.label": "Estimacion Final",
   "planning.room.task.final-estimation": "Tarea estimada en: {{estimation}}",
   "planning.home.title": "Practica Planning Poker con tus compañeros!",

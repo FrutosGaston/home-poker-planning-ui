@@ -12,6 +12,7 @@ import {DeckModel} from '../../../../models/Deck.model';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import {CardModel} from '../../../../models/Card.model';
 
 describe('EstimationFormComponent', () => {
   let component: EstimationFormComponent;
@@ -68,8 +69,9 @@ describe('EstimationFormComponent', () => {
     cardIdField = component.estimationForm.controls.cardId;
     cardIdField.setValue('1');
     expect(component.estimationForm.valid).toBeTrue();
+    const card: CardModel = { id: 1, deckId: 1, value: '3' };
 
-    component.estimate();
+    component.cardSelected(card);
 
     expect(taskServiceSpy.estimate).toHaveBeenCalled();
   });

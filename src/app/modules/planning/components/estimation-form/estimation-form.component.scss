@@ -27,16 +27,22 @@ drag-scroll {
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 25%);
 }
 
-.move-button {
-  cursor: pointer;
+.move-button-container {
   height: 290px;
   width: 75px;
+}
+
+.move-button {
+  cursor: pointer;
+  bottom: 93px;
+  height: 100px;
+  width: 75px;
   position: fixed;
-  bottom: 0;
   background-color: #3e3e3e3b;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 8px;
 
   &:hover {
     background-color: #3e3e3edb;
@@ -45,17 +51,17 @@ drag-scroll {
   mat-icon {
     font-size: 100px;
     width: 100px;
-    height: 75px;
+    height: 95px;
     user-select: none;
   }
 }
 
 .move-next-button {
-  right: 15px;
+  right: 30px;
 }
 
 .move-back-button {
-  left: 0;
+  left: 15px;
 }
 
 .card-value {

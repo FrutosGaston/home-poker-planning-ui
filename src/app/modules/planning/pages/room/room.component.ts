@@ -77,7 +77,7 @@ export class RoomComponent implements OnInit {
   getEstimation(id: number): EstimationModel {
     return this.currentTask &&
       this.currentTask.estimations &&
-      this.currentTask.estimations.find(estimation => estimation.guestUserId === id);
+      this.currentTask.estimations.find(estimation => estimation.active && estimation.guestUserId === id);
   }
 
   taskSelected(task: TaskModel): void {
@@ -117,6 +117,15 @@ export class RoomComponent implements OnInit {
     });
   }
 
+  private bindEstimationsInvalidated(): void {
+    this.taskService.onEstimationsInvalidated(this.getRoomId()).subscribe((updatedTask) => {
+      const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.id);
+      const taskToUpdate = this.tasks[taskIndex];
+      taskToUpdate.estimations = updatedTask.estimations;
+      this.updateTaskState();
+    });
+  }
+
   private getRoomId(): number {
     return this.room.id;
   }
@@ -126,9 +135,14 @@ export class RoomComponent implements OnInit {
     this.bindEstimationCreated();
     this.bindTaskCreated();
     this.bindTaskUpdated();
+    this.bindEstimationsInvalidated();
   }
 
   toggleEstimation(): void {
     this.showEstimation = !this.showEstimation;
+  }
+
+  resetEstimations(): void {
+    this.taskService.invalidateEstimations(this.currentTask.id).subscribe();
   }
 }

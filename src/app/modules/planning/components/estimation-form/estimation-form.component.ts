@@ -6,7 +6,7 @@ import {DeckService} from '../../../../services/deck.service';
 import {EstimationModel} from '../../../../models/Estimation.model';
 import {CardModel} from '../../../../models/Card.model';
 import {DragScrollComponent} from 'ngx-drag-scroll';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-estimation-form',
@@ -16,18 +16,18 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     trigger('slideDown', [
       transition('closed=>opened', [
         style({bottom: '0'}),
-        animate('700ms ease-in', style({bottom: '290px'}))
+        animate('500ms ease-in', style({bottom: '290px'}))
       ]),
       transition('opened=>closed', [
         style({bottom: '290px'}),
-        animate('700ms ease-in', style({bottom: '0'}))
+        animate('500ms ease-in', style({bottom: '0'}))
       ]),
       transition(':enter', [
         style({transform: 'translateY(100%)'}),
-        animate('700ms ease-in', style({transform: 'translateY(0%)'}))
+        animate('500ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition(':leave', [
-        animate('700ms ease-in', style({transform: 'translateY(100%)'}))
+        animate('500ms ease-in', style({transform: 'translateY(100%)'}))
       ])
     ])
   ]

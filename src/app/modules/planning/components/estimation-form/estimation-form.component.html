@@ -20,7 +20,7 @@
     <mat-icon *ngIf="open">expand_more</mat-icon>
     <mat-icon *ngIf="!open">expand_less</mat-icon>
   </div>
-  <div *ngIf="open" [@slideDown]="state">
+  <div *ngIf="open" @slideDown>
     <drag-scroll class="estimation-carousel" #cardscroll>
       <mat-card *ngFor="let card of deck && deck.cards" drag-scroll-item class="estimation-card">
         <div (click)="cardSelected(card)" class="estimation-card-content">

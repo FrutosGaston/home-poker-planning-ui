@@ -8,4 +8,5 @@ export class EstimationModel {
   guestUserId: number;
   taskId: number;
   createdAt?: Date;
+  active?: boolean;
 }
