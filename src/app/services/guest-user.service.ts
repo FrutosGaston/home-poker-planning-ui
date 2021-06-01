@@ -2,10 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {GuestUserModel} from '../models/GuestUser.model';
-import {map, take, tap} from 'rxjs/operators';
-import {RxStompService} from '@stomp/ng2-stompjs';
-import {Message} from '@stomp/stompjs';
-import {CaseConverter} from '../util/case-converter';
+import {take, tap} from 'rxjs/operators';
+import {MessageListenerService} from './message-listener.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +12,7 @@ export class GuestUserService {
 
   baseURL = 'http://localhost:8080/api/v1/guest-users/';
 
-  constructor(private http: HttpClient, private rxStompService: RxStompService) {}
+  constructor(private http: HttpClient, private messageListenerService: MessageListenerService) {}
 
   create(guestUser: GuestUserModel): Observable<number> {
     const headers = { 'content-type': 'application/json'};
@@ -33,12 +31,7 @@ export class GuestUserService {
   }
 
   onNewGuestUser(roomId: number): Observable<GuestUserModel> {
-    return this.rxStompService.watch(`/room/${roomId}/guest-users/created`).pipe(
-      map((message: Message) => {
-        const jsonBody = message.body;
-        return CaseConverter.keysToCamel(JSON.parse(jsonBody)) as GuestUserModel;
-      })
-    );
+    return this.messageListenerService.listen(`/room/${roomId}/guest-users/created`);
   }
 
   get loggedGuestUser(): GuestUserModel {

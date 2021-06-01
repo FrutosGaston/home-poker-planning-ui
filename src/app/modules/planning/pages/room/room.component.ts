@@ -81,7 +81,7 @@ export class RoomComponent implements OnInit {
   }
 
   taskSelected(task: TaskModel): void {
-    this.currentTask = task;
+    this.roomService.update(this.room.id, { selectedTaskId: task.id }).subscribe();
     this.updateTaskState();
   }
 
@@ -126,6 +126,13 @@ export class RoomComponent implements OnInit {
     });
   }
 
+  private bindRoomUpdated(): void {
+    this.roomService.onRoomUpdated(this.getRoomId()).subscribe((updatedRoom) => {
+      this.currentTask = this.tasks.find(task => task.id === updatedRoom.selectedTaskId);
+      this.updateTaskState();
+    });
+  }
+
   private getRoomId(): number {
     return this.room.id;
   }
@@ -136,6 +143,7 @@ export class RoomComponent implements OnInit {
     this.bindTaskCreated();
     this.bindTaskUpdated();
     this.bindEstimationsInvalidated();
+    this.bindRoomUpdated();
   }
 
   toggleEstimation(): void {

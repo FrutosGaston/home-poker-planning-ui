@@ -3,4 +3,5 @@ export class RoomModel {
   title: string;
   description: string;
   deckId: number;
+  selectedTaskId?: number;
 }

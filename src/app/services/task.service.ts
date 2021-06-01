@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {TaskModel} from '../models/Task.model';
-import {Message} from '@stomp/stompjs';
-import {RxStompService} from '@stomp/ng2-stompjs';
-import {CaseConverter} from '../util/case-converter';
 import {EstimationModel} from '../models/Estimation.model';
+import {MessageListenerService} from './message-listener.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +13,7 @@ export class TaskService {
 
   baseURL = 'http://localhost:8080/api/v1/tasks';
 
-  constructor(private http: HttpClient, private rxStompService: RxStompService) {}
+  constructor(private http: HttpClient, private messageListenerService: MessageListenerService) {}
 
   getByRoom(roomId: number): Observable<TaskModel[]> {
     return this.http.get<TaskModel[]>(`${this.baseURL}?roomId=${roomId}`)
@@ -60,26 +58,24 @@ export class TaskService {
   }
 
   onNewEstimation(roomId: number): Observable<EstimationModel> {
-    return this.rxStompService.watch(`/room/${roomId}/estimations/created`).pipe(
-      map((message: Message) => CaseConverter.keysToCamel(JSON.parse(message.body)) as EstimationModel)
-    );
+    return this.messageListenerService.listen(`/room/${roomId}/estimations/created`);
   }
 
   onTaskEstimated(roomId: number): Observable<TaskModel> {
-    return this.rxStompService.watch(`/room/${roomId}/tasks/estimated`).pipe(
-      map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
+    return this.messageListenerService.listen(`/room/${roomId}/tasks/estimated`).pipe(
+      map((task: TaskModel) => new TaskModel(task))
     );
   }
 
   onNewTask(roomId: number): Observable<TaskModel> {
-    return this.rxStompService.watch(`/room/${roomId}/tasks/created`).pipe(
-      map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
+    return this.messageListenerService.listen(`/room/${roomId}/tasks/created`).pipe(
+      map((task: TaskModel) => new TaskModel(task))
     );
   }
 
   onEstimationsInvalidated(roomId: number): Observable<TaskModel> {
-    return this.rxStompService.watch(`/room/${roomId}/tasks/estimations/invalidatedAll`).pipe(
-      map((message: Message) => new TaskModel(CaseConverter.keysToCamel(JSON.parse(message.body))))
+    return this.messageListenerService.listen(`/room/${roomId}/tasks/estimations/invalidatedAll`).pipe(
+      map((task: TaskModel) => new TaskModel(task))
     );
   }
 }
