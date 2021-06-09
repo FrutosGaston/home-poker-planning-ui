@@ -26,14 +26,18 @@
         {{ 'planning.room.taskList.button' | translate }}
       </button>
 
-      <div *ngIf="currentTask" class="task-title-container">
-        <h3>{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
-        <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>
+      <div class="desk-container">
+        <div class="desk">
+          <div *ngIf="currentTask" class="task-title-container">
+            <h3>{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
+            <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>
 
-        <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
-          <mat-icon aria-label="Side nav toggle icon">restart_alt</mat-icon>
-          {{ 'planning.room.reset.button' | translate }}
-        </button>
+            <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
+              <mat-icon aria-label="Side nav toggle icon">restart_alt</mat-icon>
+              {{ 'planning.room.reset.button' | translate }}
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="users-container">

@@ -23,7 +23,7 @@ export class TaskModel {
   }
 
   votedByAll(users: GuestUserModel[]): boolean {
-    return users.every(user => this.estimations.some(estimation => estimation.guestUserId === user.id));
+    return users.every(user => this.estimations.some(estimation => estimation.active && estimation.guestUserId === user.id));
   }
 
   done(): boolean {

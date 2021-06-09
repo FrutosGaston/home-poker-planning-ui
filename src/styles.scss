@@ -162,3 +162,9 @@ mat-sidenav {
 * {
   font-weight: bold;
 }
+
+.dark-mode {
+  .desk {
+    background-color: darken(mat-color($cyan), 40%) !important;
+  }
+}
