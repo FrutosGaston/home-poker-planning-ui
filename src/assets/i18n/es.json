@@ -12,7 +12,7 @@
   "planning.home.submit": "Unirse",
   "planning.room.title": "Estás en la sala: {{title}}",
   "planning.room.card.mandatory": "Debe ingresar una estimación",
-  "planning.room.card.label": "Estimación",
+  "planning.room.card.label": "Estimación final",
   "planning.room.estimate": "Estimar",
   "planning.room.task.title": "Estimando: {{title}}",
   "planning.room.taskList.button": "Tareas",

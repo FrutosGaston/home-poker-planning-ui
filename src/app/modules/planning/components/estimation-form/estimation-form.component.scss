@@ -20,7 +20,7 @@ drag-scroll {
 
 .estimation-card {
   cursor: pointer;
-  height: 230px;
+  height: 273px;
   width: 200px;
   margin: 12px;
   border-radius: 30px;
@@ -34,7 +34,7 @@ drag-scroll {
 
 .move-button {
   cursor: pointer;
-  bottom: 93px;
+  bottom: 115px;
   height: 100px;
   width: 75px;
   position: fixed;
@@ -101,7 +101,7 @@ drag-scroll {
   }
 
   &.open {
-    bottom: 290px;
+    bottom: 333px;
   }
 
   &.close {

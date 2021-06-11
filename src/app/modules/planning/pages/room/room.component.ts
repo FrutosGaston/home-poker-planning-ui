@@ -23,6 +23,7 @@ export class RoomComponent implements OnInit {
   taskDone: boolean;
   room: RoomModel;
   showEstimation = false;
+  splittedUsers: { below: GuestUserModel[]; left: GuestUserModel[]; above: GuestUserModel[]; right: GuestUserModel[] };
 
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
@@ -50,9 +51,20 @@ export class RoomComponent implements OnInit {
 
     combineLatest([users$, tasks$]).subscribe(results => {
       this.usersInRoom = results[0];
+      this.updateUsersInRoomState();
       this.tasks = results[1].sort(TaskModel.dateComparator);
       this.setCurrentTask();
     });
+  }
+
+  private updateUsersInRoomState(): void {
+    const usersInRoom = this.usersInRoom;
+    const halfwayThrough = Math.floor(usersInRoom.length / 2);
+    const usersAbove = usersInRoom.slice(0, halfwayThrough - 1);
+    const usersLeft = usersInRoom.slice(halfwayThrough - 1, halfwayThrough);
+    const usersRight = usersInRoom.slice(halfwayThrough, halfwayThrough + 1);
+    const usersBelow = usersInRoom.slice(halfwayThrough + 1, usersInRoom.length);
+    this.splittedUsers = { above: usersAbove, below: usersBelow, left: usersLeft, right: usersRight };
   }
 
   private updateTaskState(): void {
@@ -88,6 +100,7 @@ export class RoomComponent implements OnInit {
   private bindGuestUserCreated(): void {
     this.guestUserService.onNewGuestUser(this.getRoomId()).subscribe((guestUser) => {
       this.usersInRoom.push(guestUser);
+      this.updateUsersInRoomState();
       this.updateTaskState();
     });
   }

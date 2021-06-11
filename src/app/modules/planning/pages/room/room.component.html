@@ -2,7 +2,7 @@
   <div>YOU MUST BE LOGGED IN</div>
 </div>
 
-<mat-sidenav-container>
+<mat-sidenav-container autosize="true">
 
   <mat-sidenav #sidenav mode="over" class="sidenav">
     <mat-nav-list>
@@ -16,61 +16,70 @@
 
   <mat-sidenav-content class="sidenav-content">
 
-    <div *ngIf="loggedUser && room">
+    <div *ngIf="loggedUser && room && splittedUsers">
       <h1>{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
       <h2 *ngIf="room.description">{{room.description}}</h2>
 
-      <button mat-raised-button type="button" aria-label="Toggle sidenav" (click)="sidenav.toggle()"
-              color="primary" class="toggle-button">
-        <mat-icon aria-label="Side nav toggle icon">list</mat-icon>
-        {{ 'planning.room.taskList.button' | translate }}
-      </button>
+      <div class="top-buttons-container">
+        <button mat-raised-button type="button" aria-label="Toggle sidenav" (click)="sidenav.toggle()"
+                color="primary" class="toggle-button">
+          <mat-icon aria-label="Side nav toggle icon">list</mat-icon>
+          {{ 'planning.room.taskList.button' | translate }}
+        </button>
 
-      <div class="desk-container">
-        <div class="desk">
-          <div *ngIf="currentTask" class="task-title-container">
-            <h3>{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
-            <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>
-
-            <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
-              <mat-icon aria-label="Side nav toggle icon">restart_alt</mat-icon>
-              {{ 'planning.room.reset.button' | translate }}
-            </button>
-          </div>
-        </div>
+        <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
+          <mat-icon aria-label="Side nav toggle icon">restart_alt</mat-icon>
+          {{ 'planning.room.reset.button' | translate }}
+        </button>
       </div>
 
-      <div class="users-container">
-        <ng-container *ngFor="let user of usersInRoom; let i = index">
-          <mat-card class="user-card">
-            <strong class="user-name color-{{i % 10}}">{{user.name}}</strong>
-
-            <ng-container *ngIf="taskVotedByAll || taskDone && getEstimation(user.id)">
-              <strong>{{getEstimation(user.id) && getEstimation(user.id).card && getEstimation(user.id).card.value}}</strong>
-            </ng-container>
-
-            <ng-container *ngIf="!taskVotedByAll && !taskDone">
-              <ng-container *ngIf="getEstimation(user.id)">
-                <mat-icon class="done-icon" inline="true">done</mat-icon>
-              </ng-container>
-
-
-              <ng-container *ngIf="!getEstimation(user.id)">
-                <ng-container *ngIf="!currentTask || !(user.id === loggedUser.id)">
-                  <mat-icon class="pending-icon" inline="true">pending</mat-icon>
-                </ng-container>
-
-                <ng-container *ngIf="currentTask && user.id === loggedUser.id">
-                  <button mat-raised-button color="primary" (click)="toggleEstimation()">{{ 'planning.room.estimate' | translate }}</button>
-                </ng-container>
-              </ng-container>
-            </ng-container>
-
-          </mat-card>
+      <div class="users-container horizontal above">
+        <ng-container *ngFor="let user of splittedUsers.above">
+          <app-user-in-room positionToDesk="above" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+                            [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"
+                            (toggleEstimationEvent)="toggleEstimation()"></app-user-in-room>
         </ng-container>
       </div>
 
-      <app-estimation-form *ngIf="currentTask" class="final-estimation-form" isFinal="true" [deckId]="room.deckId" [guestUserId]="loggedUser.id" [taskId]="currentTask.id"></app-estimation-form>
+      <div class="desk-container">
+        <div class="users-container vertical left">
+          <ng-container *ngFor="let user of splittedUsers.left; let i = index">
+            <app-user-in-room positionToDesk="left" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+                              [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"
+                              (toggleEstimationEvent)="toggleEstimation()"></app-user-in-room>
+          </ng-container>
+        </div>
+
+        <div class="desk">
+          <div *ngIf="currentTask" class="task-title-container">
+            <h3 class="task-title">{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
+            <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>
+
+            <app-estimation-form *ngIf="currentTask" class="final-estimation-form"
+                                 isFinal="true"
+                                 [deckId]="room.deckId"
+                                 [guestUserId]="loggedUser.id"
+                                 [taskId]="currentTask.id">
+            </app-estimation-form>
+          </div>
+        </div>
+
+        <div class="users-container vertical right">
+          <ng-container *ngFor="let user of splittedUsers.right; let i = index">
+            <app-user-in-room positionToDesk="right" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+                              [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"
+                              (toggleEstimationEvent)="toggleEstimation()"></app-user-in-room>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="users-container horizontal below">
+        <ng-container *ngFor="let user of splittedUsers.below; let i = index">
+          <app-user-in-room positionToDesk="below" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+                            [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"
+                            (toggleEstimationEvent)="toggleEstimation()"></app-user-in-room>
+        </ng-container>
+      </div>
     </div>
 
     <app-estimation-form *ngIf="!taskVotedByAll &&

@@ -32,6 +32,7 @@ import { EstimationFormComponent } from './modules/planning/components/estimatio
 import {MatSelectModule} from '@angular/material/select';
 import { TaskListComponent } from './modules/planning/components/task-list/task-list.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
+import { UserInRoomComponent } from './modules/planning/components/user-in-room/user-in-room.component';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -49,7 +50,8 @@ const routes: Routes = [
     AbstractShapeComponent,
     CreateRoomComponent,
     EstimationFormComponent,
-    TaskListComponent
+    TaskListComponent,
+    UserInRoomComponent
   ],
   imports: [
     BrowserModule,

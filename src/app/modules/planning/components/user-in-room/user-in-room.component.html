@@ -1,0 +1,29 @@
+<mat-card class="user-card">
+  <mat-icon class="user-avatar" inline="true">account_circle</mat-icon>
+  <strong class="user-name color-{{user.id % 10}}">{{user.name}}</strong>
+
+    <ng-container *ngIf="taskVotedByAll || taskDone && estimation">
+      <div [ngClass]="'estimation-card ' + positionToDesk">
+        <strong class="card-value">{{estimation && estimation.card && estimation.card.value}}</strong>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!taskVotedByAll && !taskDone">
+        <ng-container *ngIf="estimation">
+          <div [ngClass]="'estimation-card ' + positionToDesk">
+            <img class="card-back" src="assets/images/logo-hpp.svg" alt="estimation card back"/>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="!estimation">
+            <ng-container *ngIf="!currentTask || !(user.id === loggedUser.id)">
+            </ng-container>
+
+            <ng-container *ngIf="currentTask && user.id === loggedUser.id">
+                <button mat-raised-button color="primary"
+                        (click)="toggleEstimation()">{{ 'planning.room.estimate' | translate }}</button>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+
+</mat-card>

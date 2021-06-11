@@ -1,0 +1,100 @@
+@import "src/styles";
+
+.user-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.user-card {
+  justify-content: space-between;
+  margin: 12px;
+  width: 150px;
+  min-width: 150px;
+  height: 130px;
+  border-radius: 12px;
+}
+
+.card-value {
+  color: mat-color($cyan, 500);
+  font-size: 48px;
+  user-select: none;
+}
+
+.user-card mat-icon {
+  @include md-icon-size(80px);
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 20px;
+  padding: 24px 12px;
+}
+
+.done-icon {
+  background-color: mat-color($cyan, 500);
+  border-radius: 9px;
+  margin-left: 4px;
+  min-width: 24px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.pending-icon {
+  color: #404040;
+}
+
+.user-avatar {
+  font-size: 72px;
+}
+
+.color-0 { color: #6666ff }
+.color-1 { color: #339933 }
+.color-2 { color: #ff9900 }
+.color-3 { color: #990000 }
+.color-4 { color: #003399 }
+.color-5 { color: #cc0099 }
+.color-6 { color: #33ccff }
+.color-7 { color: #666699 }
+.color-8 { color: #666633 }
+.color-9 { color: #006666 }
+
+
+.estimation-card {
+  width: 100px;
+  height: 136px;
+  border-radius: 16px;
+  background-color: white;
+  position: absolute;
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 75%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.above {
+    bottom: -150px;
+  }
+
+  &.below {
+    top: -150px;
+  }
+
+  &.left {
+    right: -112px;
+  }
+
+  &.right {
+    left: -112px;
+  }
+
+  .card-back {
+    width: 92px;
+    height: 128px;
+    background-color: #212121;
+    border-radius: 11px;
+
+    img {
+    }
+  }
+}

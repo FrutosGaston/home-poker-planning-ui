@@ -16,10 +16,10 @@ import {animate, style, transition, trigger} from '@angular/animations';
     trigger('slideDown', [
       transition('closed=>opened', [
         style({bottom: '0'}),
-        animate('500ms ease-in', style({bottom: '290px'}))
+        animate('500ms ease-in', style({bottom: '333px'}))
       ]),
       transition('opened=>closed', [
-        style({bottom: '290px'}),
+        style({bottom: '333px'}),
         animate('500ms ease-in', style({bottom: '0'}))
       ]),
       transition(':enter', [
