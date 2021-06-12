@@ -22,7 +22,6 @@ export class RoomComponent implements OnInit {
   tasks: TaskModel[];
   taskDone: boolean;
   room: RoomModel;
-  showEstimation = false;
   splittedUsers: { below: GuestUserModel[]; left: GuestUserModel[]; above: GuestUserModel[]; right: GuestUserModel[] };
 
   constructor(private guestUserService: GuestUserService,
@@ -157,10 +156,6 @@ export class RoomComponent implements OnInit {
     this.bindTaskUpdated();
     this.bindEstimationsInvalidated();
     this.bindRoomUpdated();
-  }
-
-  toggleEstimation(): void {
-    this.showEstimation = !this.showEstimation;
   }
 
   resetEstimations(): void {

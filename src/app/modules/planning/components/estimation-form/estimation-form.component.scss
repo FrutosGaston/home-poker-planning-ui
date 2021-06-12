@@ -108,3 +108,14 @@ drag-scroll {
     bottom: 0;
   }
 }
+
+.open-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .open-button-text {
+    height: 0;
+    color: mat-color($primary);
+  }
+}

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../../../../services/task.service';
 import {DeckModel} from '../../../../models/Deck.model';
@@ -38,6 +38,7 @@ export class EstimationFormComponent implements OnInit {
   @Input() guestUserId: number;
   @Input() deckId: number;
   @Input() isFinal: boolean;
+  @Output() toggleEstimationEvent = new EventEmitter<any>();
   @ViewChild('cardscroll', {read: DragScrollComponent}) ds: DragScrollComponent;
 
   // tslint:disable-next-line:variable-name
@@ -48,14 +49,6 @@ export class EstimationFormComponent implements OnInit {
               private deckService: DeckService,
               private formBuilder: FormBuilder) { }
 
-  @Input() set open(show: boolean) {
-    this.state = show ? 'opened' : 'closed';
-  }
-
-  get open(): boolean {
-    return this.state === 'opened';
-  }
-
   @Input() set taskId(taskId: number) {
     this._taskId = taskId;
     if (this.estimationForm) { this.estimationForm.reset(); }
@@ -63,6 +56,10 @@ export class EstimationFormComponent implements OnInit {
 
   get taskId(): number {
     return this._taskId;
+  }
+
+  get open(): boolean {
+    return this.state === 'opened';
   }
 
   ngOnInit(): void {
@@ -101,4 +98,7 @@ export class EstimationFormComponent implements OnInit {
     this.ds.moveRight();
   }
 
+  toggleEstimation(): void {
+    this.toggleEstimationEvent.emit();
+  }
 }
