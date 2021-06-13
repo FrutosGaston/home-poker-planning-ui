@@ -4,13 +4,14 @@ import {Observable} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {RoomModel} from '../models/Room.model';
 import {MessageListenerService} from './message-listener.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
 
-  baseURL = 'http://localhost:8080/api/v1/rooms';
+  baseURL = `${environment.apiUrl}/api/v1/rooms`;
 
   constructor(private http: HttpClient, private messageListenerService: MessageListenerService) {}
 

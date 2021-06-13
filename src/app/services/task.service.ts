@@ -5,13 +5,14 @@ import {map, take} from 'rxjs/operators';
 import {TaskModel} from '../models/Task.model';
 import {EstimationModel} from '../models/Estimation.model';
 import {MessageListenerService} from './message-listener.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  baseURL = 'http://localhost:8080/api/v1/tasks';
+  baseURL = `${environment.apiUrl}/api/v1/tasks`;
 
   constructor(private http: HttpClient, private messageListenerService: MessageListenerService) {}
 

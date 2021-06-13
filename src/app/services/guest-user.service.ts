@@ -4,13 +4,14 @@ import {Observable} from 'rxjs';
 import {GuestUserModel} from '../models/GuestUser.model';
 import {take, tap} from 'rxjs/operators';
 import {MessageListenerService} from './message-listener.service';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuestUserService {
 
-  baseURL = 'http://localhost:8080/api/v1/guest-users/';
+  baseURL = `${environment.apiUrl}/api/v1/guest-users`;
 
   constructor(private http: HttpClient, private messageListenerService: MessageListenerService) {}
 

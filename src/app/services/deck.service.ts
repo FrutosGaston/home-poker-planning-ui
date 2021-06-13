@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {map, take, tap} from 'rxjs/operators';
 import {DeckModel} from '../models/Deck.model';
+import {environment} from '../../environments/environment';
 
 
 
@@ -11,7 +12,7 @@ import {DeckModel} from '../models/Deck.model';
 })
 export class DeckService {
 
-  baseURL = 'http://localhost:8080/api/v1/decks';
+  baseURL = `${environment.apiUrl}/api/v1/decks`;
   private decks: DeckModel[];
 
   constructor(private http: HttpClient) {}

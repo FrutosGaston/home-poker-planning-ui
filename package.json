@@ -3,11 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "preinstall": "npm install -g @angular/cli @angular/compiler-cli typescript",
+    "heroku-postbuild": "ng build --aot --prod --configuration=production"
+  },
+  "engines": {
+    "node": "15.14.0",
+    "npm": "7.7.6"
   },
   "private": true,
   "dependencies": {
@@ -25,8 +31,10 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@stomp/ng2-stompjs": "^8.0.0",
     "@stomp/stompjs": "^6.1.0",
+    "express": "^4.17.1",
     "material-design-icons": "^3.0.1",
     "ngx-drag-scroll": "11.0.0-beta.1",
+    "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "sockjs-client": "^1.5.1",
     "tslib": "^2.0.0",

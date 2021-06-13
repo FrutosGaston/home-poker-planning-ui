@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://home-planning-poker-api.herokuapp.com',
+  wsUrl: 'wss://home-planning-poker-api.herokuapp.com'
 };
