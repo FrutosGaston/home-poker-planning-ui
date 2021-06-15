@@ -78,10 +78,8 @@
       </div>
     </div>
 
-    <app-estimation-form *ngIf="!taskVotedByAll &&
-                            !taskDone &&
-                            !getEstimation(loggedUser.id) &&
-                            currentTask"
+    <app-estimation-form *ngIf="currentTask"
+                         [show]="taskVotedByAll || taskDone || !!getEstimation(loggedUser.id)"
                          [deckId]="room.deckId"
                          [guestUserId]="loggedUser.id"
                          [taskId]="currentTask.id">

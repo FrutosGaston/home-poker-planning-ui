@@ -15,24 +15,13 @@
 </form>
 </ng-container>
 
-<div *ngIf="!isFinal" class="estimation-carousel-container">
-  <div [@slideDown]="state" (click)="toggle()" [ngClass]="['toggle-button ', open ? 'open' : 'close']">
-    <mat-icon *ngIf="open">expand_more</mat-icon>
-
-    <div class="open-button-container" *ngIf="!open">
-      <span class="open-button-text">{{ 'planning.room.estimate' | translate }}</span>
-      <mat-icon *ngIf="!open">expand_less</mat-icon>
-    </div>
-  </div>
-  <div *ngIf="open" @slideDown>
-    <drag-scroll class="estimation-carousel" #cardscroll>
-      <mat-card *ngFor="let card of deck && deck.cards" drag-scroll-item class="estimation-card">
-        <div (click)="cardSelected(card)" class="estimation-card-content">
-          <strong class="card-value">{{card.value}}</strong>
-        </div>
-      </mat-card>
-    </drag-scroll>
-    <div (click)="moveLeft()" class="move-button move-back-button"><mat-icon>navigate_before</mat-icon></div>
-    <div (click)="moveRight()" class="move-button move-next-button"><mat-icon>navigate_next</mat-icon></div>
+<div *ngIf="!isFinal" class="estimation-carousel-container" [@slideUp]="show" [hidden]="show">
+  <span class="choose-a-card">{{ 'planning.room.choose-a-card' | translate }}</span>
+  <div class="estimation-carousel">
+    <mat-card (click)="cardSelected(card)" *ngFor="let card of deck && deck.cards" drag-scroll-item class="estimation-card">
+      <div class="estimation-card-content">
+        <strong class="card-value">{{card.value}}</strong>
+      </div>
+    </mat-card>
   </div>
 </div>

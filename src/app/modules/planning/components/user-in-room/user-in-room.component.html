@@ -1,9 +1,9 @@
-<mat-card class="user-card">
+<mat-card class="user-card" @firstRender>
   <mat-icon class="user-avatar" inline="true">account_circle</mat-icon>
   <strong class="user-name color-{{user.id % 10}}">{{user.name}}</strong>
 
   <ng-container *ngIf="estimation">
-    <div [ngClass]="'estimation-card ' + positionToDesk" [@flipCard]="taskVotedByAll || taskDone">
+    <div [ngClass]="'estimation-card ' + positionToDesk" [@flipCard]="taskVotedByAll || taskDone" @slideUp>
       <strong class="card-value">{{estimation && estimation.card && estimation.card.value}}</strong>
       <img class="card-back" src="assets/images/logo-hpp.svg" alt="estimation card back"/>
     </div>

@@ -18,6 +18,19 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       })),
       transition('true => false', animate('500ms')),
       transition('false => true', animate('500ms'))
+    ]),
+    trigger('firstRender', [
+      transition(':enter', [])
+    ]),
+    trigger('slideUp', [
+      transition(':enter', [
+        style({ transform: 'translateY(500%)' }),
+        animate('500ms ease-in', style({ transform: 'translateY(0%)' }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateY(0%)' }),
+        animate('500ms ease-in', style({ transform: 'translateY(500%)' }))
+      ])
     ])
   ]
 })

@@ -1,33 +1,30 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TaskService} from '../../../../services/task.service';
 import {DeckModel} from '../../../../models/Deck.model';
 import {DeckService} from '../../../../services/deck.service';
 import {EstimationModel} from '../../../../models/Estimation.model';
 import {CardModel} from '../../../../models/Card.model';
-import {DragScrollComponent} from 'ngx-drag-scroll';
-import {animate, style, transition, trigger} from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-estimation-form',
   templateUrl: './estimation-form.component.html',
   styleUrls: ['./estimation-form.component.scss'],
   animations: [
-    trigger('slideDown', [
-      transition('closed=>opened', [
-        style({bottom: '0'}),
-        animate('500ms ease-in', style({bottom: '333px'}))
-      ]),
-      transition('opened=>closed', [
-        style({bottom: '333px'}),
-        animate('500ms ease-in', style({bottom: '0'}))
-      ]),
-      transition(':enter', [
+    trigger('slideUp', [
+      state('true', style({
+        transform: 'translateY(100%)'
+      })),
+      state('false', style({
+        display: 'translateY(0%)'
+      })),
+      transition('true=>false', [
         style({transform: 'translateY(100%)'}),
-        animate('500ms ease-in', style({transform: 'translateY(0%)'}))
+        animate('300ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
-      transition(':leave', [
-        animate('500ms ease-in', style({transform: 'translateY(100%)'}))
+      transition('false=>true', [
+        animate('300ms ease-in', style({transform: 'translateY(100%)'}))
       ])
     ])
   ]
@@ -38,8 +35,7 @@ export class EstimationFormComponent implements OnInit {
   @Input() guestUserId: number;
   @Input() deckId: number;
   @Input() isFinal: boolean;
-  @Output() toggleEstimationEvent = new EventEmitter<any>();
-  @ViewChild('cardscroll', {read: DragScrollComponent}) ds: DragScrollComponent;
+  @Input() show = true;
 
   // tslint:disable-next-line:variable-name
   _taskId: number;
@@ -56,10 +52,6 @@ export class EstimationFormComponent implements OnInit {
 
   get taskId(): number {
     return this._taskId;
-  }
-
-  get open(): boolean {
-    return this.state === 'opened';
   }
 
   ngOnInit(): void {
@@ -84,21 +76,5 @@ export class EstimationFormComponent implements OnInit {
     estimation.taskId = this.taskId;
     estimation.cardId = card.id;
     this.taskService.estimate(estimation).subscribe(_ => {});
-  }
-
-  toggle(): void {
-    this.state = this.state === 'opened' ? 'closed' : 'opened';
-  }
-
-  moveLeft(): void {
-    this.ds.moveLeft();
-  }
-
-  moveRight(): void {
-    this.ds.moveRight();
-  }
-
-  toggleEstimation(): void {
-    this.toggleEstimationEvent.emit();
   }
 }
