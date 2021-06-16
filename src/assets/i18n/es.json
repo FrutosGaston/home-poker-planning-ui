@@ -1,7 +1,7 @@
 {
   "language.select": "Seleccionar lenguage",
   "language.spanish": "Español",
-  "language.english": "Ingles",
+  "language.english": "English",
   "planning.home.name": "Nombre",
   "planning.home.name.mandatory": "Este campo es obligatorio.",
   "planning.home.name.min": "El nombre debe tener al menos 3 caracteres.",

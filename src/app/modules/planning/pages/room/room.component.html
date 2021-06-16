@@ -1,6 +1,5 @@
-<div *ngIf="!loggedUser">
-  <div>YOU MUST BE LOGGED IN</div>
-</div>
+<div *ngIf="!loggedUser"><div>YOU MUST BE LOGGED IN</div></div>
+<div *ngIf="loggedUser && !validUser"><span>YOU'RE NOT PART OF THIS ROOM</span></div>
 
 <mat-sidenav-container autosize="true">
 
@@ -16,7 +15,7 @@
 
   <mat-sidenav-content class="sidenav-content">
 
-    <div *ngIf="loggedUser && room && splittedUsers">
+    <div *ngIf="loggedUser && validUser && room && splittedUsers">
       <h1>{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
       <h2 *ngIf="room.description">{{room.description}}</h2>
 

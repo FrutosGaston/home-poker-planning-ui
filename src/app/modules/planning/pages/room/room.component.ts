@@ -23,6 +23,7 @@ export class RoomComponent implements OnInit {
   taskDone: boolean;
   room: RoomModel;
   splittedUsers: { below: GuestUserModel[]; left: GuestUserModel[]; above: GuestUserModel[]; right: GuestUserModel[] };
+  validUser = false;
 
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
@@ -35,6 +36,7 @@ export class RoomComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const roomId = params.id || this.loggedUser.roomId;
+      this.validUser = this.loggedUser.roomId === roomId;
       this.roomService.get(roomId).subscribe(room => {
         this.room = room;
         this.setupState();
