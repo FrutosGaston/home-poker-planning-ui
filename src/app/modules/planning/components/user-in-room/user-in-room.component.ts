@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {GuestUserModel} from '../../../../models/GuestUser.model';
 import {EstimationModel} from '../../../../models/Estimation.model';
 import {TaskModel} from '../../../../models/Task.model';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, group, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-user-in-room',
@@ -24,12 +24,18 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     ]),
     trigger('slideUp', [
       transition(':enter', [
-        style({ transform: 'translateY(500%)' }),
-        animate('500ms ease-in', style({ transform: 'translateY(0%)' }))
+        style({ transform: 'translateY(250%)', opacity: 0 }),
+        group([
+          animate('250ms ease-in', style({ opacity: 1 })),
+          animate('500ms ease-in', style({ transform: 'translateY(0%)' }))
+        ])
       ]),
       transition(':leave', [
-        style({ transform: 'translateY(0%)' }),
-        animate('500ms ease-in', style({ transform: 'translateY(500%)' }))
+        style({ transform: 'translateY(0%)', opacity: 1 }),
+        group([
+          animate('600ms ease-in', style({ transform: 'translateY(250%)' })),
+          animate('300ms 300ms', style({ opacity: 0 }))
+        ])
       ])
     ])
   ]
