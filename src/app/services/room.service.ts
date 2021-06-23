@@ -15,16 +15,16 @@ export class RoomService {
 
   constructor(private http: HttpClient, private messageListenerService: MessageListenerService) {}
 
-  create(room: RoomModel): Observable<number> {
+  create(room: RoomModel): Observable<RoomModel> {
     const headers = { 'content-type': 'application/json'};
     const body = JSON.stringify(room);
 
-    return this.http.post<number>(`${this.baseURL}`, body, { headers })
+    return this.http.post<RoomModel>(`${this.baseURL}`, body, { headers })
       .pipe(take(1));
   }
 
-  get(roomId: number): Observable<RoomModel> {
-    return this.http.get<RoomModel>(`${this.baseURL}/${roomId}`)
+  getByUUID(uuid: string): Observable<RoomModel> {
+    return this.http.get<RoomModel>(`${this.baseURL}/${uuid}`)
       .pipe(take(1));
   }
 

@@ -37,7 +37,7 @@ import { UserInRoomComponent } from './modules/planning/components/user-in-room/
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
   { path: 'room', component: RoomComponent },
-  { path: 'room/:id', component: RoomComponent },
+  { path: 'room/:uuid', component: RoomComponent },
 ];
 
 @NgModule({

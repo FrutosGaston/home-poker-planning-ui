@@ -35,9 +35,8 @@ export class RoomComponent implements OnInit {
     if (!this.loggedUser) { return; }
 
     this.route.params.subscribe(params => {
-      const roomId = params.id || this.loggedUser.roomId;
-      this.validUser = this.loggedUser.roomId.toString() === roomId;
-      this.roomService.get(roomId).subscribe(room => {
+      this.roomService.getByUUID(params.uuid).subscribe(room => {
+        this.validUser = this.loggedUser.roomId.toString() === room.id.toString();
         this.room = room;
         this.setupState();
         this.bindEvents();

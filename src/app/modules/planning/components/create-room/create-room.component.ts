@@ -41,9 +41,9 @@ export class CreateRoomComponent implements OnInit {
       return;
     }
     const formValues = this.roomForm.value;
-    this.roomService.create({ title: formValues.title, description: formValues.description, deckId: formValues.deck }).subscribe(roomId => {
-        this.guestUserService.create({ name: formValues.name, roomId } as GuestUserModel)
-          .subscribe(res => this.router.navigateByUrl(`/room/${roomId}`));
+    this.roomService.create({ title: formValues.title, description: formValues.description, deckId: formValues.deck }).subscribe(room => {
+        this.guestUserService.create({ name: formValues.name, roomId: room.id } as GuestUserModel)
+          .subscribe(res => this.router.navigateByUrl(`/room/${room.uuid}`));
       }
       , error => console.error(error));
   }
