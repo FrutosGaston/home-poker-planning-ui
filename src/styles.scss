@@ -167,6 +167,26 @@ mat-sidenav {
   .desk {
     background-color: darken(mat-color($cyan), 40%) !important;
   }
+
+  .estimation-card {
+    border: 4px solid mat-color($cyan, 500);
+    background-color: #212121 !important;
+
+    .card-value {
+      color: mat-color($accent);
+    }
+  }
+}
+
+.light-mode {
+  .estimation-card {
+    border: 4px solid mat-color($cyan, 700);
+    background-color: white;
+
+    .card-value {
+      color: mat-color($cyan, 500);
+    }
+  }
 }
 
 .ok-snackbar .mat-simple-snackbar {

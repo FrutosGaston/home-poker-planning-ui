@@ -41,7 +41,7 @@
 
       <div class="users-container horizontal above">
         <ng-container *ngFor="let user of splittedUsers.above">
-          <app-user-in-room positionToDesk="above" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+          <app-user-in-room positionToDesk="above" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone" [isCurrentUser]="user.id === loggedUser.id"
                             [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"></app-user-in-room>
         </ng-container>
       </div>
@@ -49,7 +49,7 @@
       <div class="desk-container">
         <div class="users-container vertical left">
           <ng-container *ngFor="let user of splittedUsers.left; let i = index">
-            <app-user-in-room positionToDesk="left" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+            <app-user-in-room positionToDesk="left" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone" [isCurrentUser]="user.id === loggedUser.id"
                               [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"></app-user-in-room>
           </ng-container>
         </div>
@@ -70,7 +70,7 @@
 
         <div class="users-container vertical right">
           <ng-container *ngFor="let user of splittedUsers.right; let i = index">
-            <app-user-in-room positionToDesk="right" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+            <app-user-in-room positionToDesk="right" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone" [isCurrentUser]="user.id === loggedUser.id"
                               [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"></app-user-in-room>
           </ng-container>
         </div>
@@ -78,14 +78,14 @@
 
       <div class="users-container horizontal below">
         <ng-container *ngFor="let user of splittedUsers.below; let i = index">
-          <app-user-in-room positionToDesk="below" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone"
+          <app-user-in-room positionToDesk="below" [user]="user" [taskVotedByAll]="taskVotedByAll" [taskDone]="taskDone" [isCurrentUser]="user.id === loggedUser.id"
                             [estimation]="getEstimation(user.id)" [currentTask]="currentTask" [loggedUser]="loggedUser"></app-user-in-room>
         </ng-container>
       </div>
     </div>
 
     <app-estimation-form *ngIf="currentTask"
-                         [show]="taskVotedByAll || taskDone || !!getEstimation(loggedUser.id)"
+                         [show]="taskVotedByAll || taskDone"
                          [deckId]="room.deckId"
                          [guestUserId]="loggedUser.id"
                          [taskId]="currentTask.id">

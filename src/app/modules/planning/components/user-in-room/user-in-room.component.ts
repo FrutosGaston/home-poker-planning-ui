@@ -56,6 +56,8 @@ export class UserInRoomComponent implements OnInit {
 
   @Input() positionToDesk: string;
 
+  @Input() isCurrentUser: boolean;
+
   constructor() { }
 
   ngOnInit(): void {

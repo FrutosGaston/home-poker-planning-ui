@@ -67,7 +67,7 @@ export class EstimationFormComponent implements OnInit {
     estimation.guestUserId = this.guestUserId;
     estimation.taskId = this.taskId;
     estimation.cardId = this.estimationForm.value.cardId;
-    this.taskService.estimateFinal(estimation).subscribe(_ => {});
+    this.taskService.estimateFinal(estimation).subscribe();
   }
 
   cardSelected(card: CardModel): void {
@@ -75,6 +75,6 @@ export class EstimationFormComponent implements OnInit {
     estimation.guestUserId = this.guestUserId;
     estimation.taskId = this.taskId;
     estimation.cardId = card.id;
-    this.taskService.estimate(estimation).subscribe(_ => {});
+    this.taskService.estimate(estimation).subscribe();
   }
 }

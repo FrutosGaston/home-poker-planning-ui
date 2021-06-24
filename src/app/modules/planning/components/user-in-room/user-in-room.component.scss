@@ -58,7 +58,6 @@
   width: 100px;
   height: 136px;
   border-radius: 16px;
-  background-color: white;
   position: absolute;
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 35%);
   display: flex;
@@ -83,12 +82,10 @@
   }
 
   .card-value {
-    color: mat-color($cyan, 500);
     font-size: 48px;
     user-select: none;
     backface-visibility: hidden;
     transform: rotateY(180deg);
-
   }
 
   .card-back {

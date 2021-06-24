@@ -3,7 +3,7 @@
   <strong class="user-name color-{{user.id % 10}}">{{user.name}}</strong>
 
   <ng-container *ngIf="estimation">
-    <div [ngClass]="'estimation-card ' + positionToDesk" [@flipCard]="taskVotedByAll || taskDone" @slideUp>
+    <div [ngClass]="'estimation-card ' + positionToDesk" [@flipCard]="taskVotedByAll || taskDone || isCurrentUser" @slideUp>
       <strong class="card-value">{{estimation && estimation.card && estimation.card.value}}</strong>
       <img class="card-back" src="assets/images/logo-hpp.svg" alt="estimation card back"/>
     </div>
