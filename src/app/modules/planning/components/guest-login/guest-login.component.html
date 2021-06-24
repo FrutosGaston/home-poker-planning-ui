@@ -10,14 +10,6 @@
           <span *ngIf="guestForm.controls.name.errors.maxlength">{{ 'planning.home.name.max' | translate }}</span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="form-field" appearance="outline">
-        <mat-label>{{ 'planning.home.roomId' | translate }}</mat-label>
-        <input matInput formControlName="roomId" required autocomplete="off">
-        <mat-error *ngIf="guestForm.controls.roomId.touched && guestForm.controls.roomId.invalid">
-          <span *ngIf="guestForm.controls.roomId.errors.required">{{ 'planning.home.roomId.mandatory' | translate }}</span>
-          <span *ngIf="guestForm.controls.roomId.errors.min">{{ 'planning.home.roomId.min' | translate }}</span>
-        </mat-error>
-      </mat-form-field>
       <button mat-raised-button color="primary" type="submit">{{ 'planning.home.submit' | translate }}</button>
     </form>
   </div>

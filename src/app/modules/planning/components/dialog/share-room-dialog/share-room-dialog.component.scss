@@ -1,0 +1,21 @@
+@import "src/styles";
+
+.copy-title {
+  font-size: 24px;
+  color: mat-color($primary);
+}
+
+.copy-container {
+  margin-top: 12px;
+  display: flex;
+}
+
+.copy-text {
+  margin-right: 12px;
+}
+
+.copy-button {
+  min-width: fit-content;
+}
+
+

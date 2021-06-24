@@ -13,29 +13,10 @@
 
     <div class="guest-login-container">
       <div class="join-or-create-title-container">
-        <span class="join-room" *ngIf="!showCreateRoomForm">{{'planning.home.join-room' | translate }}</span>
-        <span class="join-room" *ngIf="showCreateRoomForm">{{'planning.home.create-room' | translate }}</span>
-        <button mat-raised-button color="primary" type="button" aria-label="Toggle create room form"
-                class="create-button" (click)="toggleCreateRoomForm()">
-          <ng-container *ngIf="!showCreateRoomForm">
-            <mat-icon class="create-button-icon" aria-label="Toggle create room form icon">add_circle</mat-icon>{{'planning.home.create-room-button' | translate }}
-          </ng-container>
-          <ng-container *ngIf="showCreateRoomForm">
-            <mat-icon class="create-button-icon" aria-label="Toggle join room form icon">login</mat-icon>{{'planning.home.join-room-button' | translate }}
-          </ng-container>
-        </button>
+        <span class="join-room">{{'planning.home.create-room' | translate }}</span>
       </div>
 
-      <app-guest-login class="guest-login" *ngIf="!showCreateRoomForm"></app-guest-login>
-      <app-create-room class="create-room-form" *ngIf="showCreateRoomForm"></app-create-room>
-    </div>
-
-    <div class="create-room-container">
-      <div class="create-button-container">
-
-      </div>
-
-
+      <app-create-room class="create-room-form"></app-create-room>
     </div>
 
   </div>

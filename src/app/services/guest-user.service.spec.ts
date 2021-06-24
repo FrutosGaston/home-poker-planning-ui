@@ -53,10 +53,11 @@ it('should return new id', () => {
 
 it('should return logged user', () => {
   const guestUserId = 1;
-  const guestUser: GuestUserModel = { name: 'A', roomId: 1 };
+  const roomId = 1;
+  const guestUser: GuestUserModel = { name: 'A', roomId };
 
   httpClientSpy.post.and.returnValue(of(guestUserId));
   guestUserService.create(guestUser).subscribe(_ => _);
 
-  expect(guestUserService.loggedGuestUser).toEqual({ id: guestUserId, ...guestUser });
+  expect(guestUserService.loggedGuestUser(roomId)).toEqual({ id: guestUserId, ...guestUser });
 });

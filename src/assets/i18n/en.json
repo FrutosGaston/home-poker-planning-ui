@@ -38,5 +38,9 @@
   "planning.room.reset.button": "Restart estimations",
   "planning.room.task-title.label": "Title",
   "planning.room.task-title.mandatory": "This field is mandatory.",
-  "planning.room.create-task": "Create task"
+  "planning.room.create-task": "Create task",
+  "planning.room.share.button": "Share room",
+  "planning.room.share.copy-button": "Copy",
+  "planning.room.share.copy-title": "Copy to Clipboard",
+  "planning.room.share.copied": "Copied"
 }

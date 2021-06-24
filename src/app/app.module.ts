@@ -33,6 +33,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { TaskListComponent } from './modules/planning/components/task-list/task-list.component';
 import { DragScrollModule } from 'ngx-drag-scroll';
 import { UserInRoomComponent } from './modules/planning/components/user-in-room/user-in-room.component';
+import { ShareRoomDialogComponent } from './modules/planning/components/dialog/share-room-dialog/share-room-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -51,7 +54,8 @@ const routes: Routes = [
     CreateRoomComponent,
     EstimationFormComponent,
     TaskListComponent,
-    UserInRoomComponent
+    UserInRoomComponent,
+    ShareRoomDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +74,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatListModule,
     MatSelectModule,
+    MatDialogModule,
+    MatSnackBarModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,

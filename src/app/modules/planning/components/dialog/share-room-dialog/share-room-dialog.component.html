@@ -1,0 +1,7 @@
+<div>
+  <span class="copy-title">{{ 'planning.room.share.copy-title' | translate }}</span>
+  <div class="copy-container">
+    <input matInput class="copy-text" readonly type="text" [value]="roomUrl" #urlInput>
+    <button mat-raised-button color="primary" class="copy-button" (click)="copyInputMessage(urlInput)">{{ 'planning.room.share.copy-button' | translate }}</button>
+  </div>
+</div>

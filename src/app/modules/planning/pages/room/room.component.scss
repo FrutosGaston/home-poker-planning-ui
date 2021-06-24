@@ -95,3 +95,22 @@ mat-sidenav-content {
 mat-sidenav-container {
   padding-bottom: 100px;
 }
+
+.guest-login-container {
+  margin-top: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.guest-login {
+  width: 50%;
+}
+
+.join-room {
+  margin-right: 12px;
+  margin-bottom: 8px;
+  font-size: 32px;
+  color: mat-color($primary);
+}

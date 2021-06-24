@@ -27,10 +27,11 @@ describe('TranslationComponent', () => {
   it('should change the active lang', () => {
     const defaultLang = 'es';
     const newLang = 'en';
+
+    component.changeLanguage(defaultLang);
     expect(component.activeLang).toBe(defaultLang);
 
     component.changeLanguage(newLang);
-
     expect(component.activeLang).toBe(newLang);
   });
 

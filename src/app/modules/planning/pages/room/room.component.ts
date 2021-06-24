@@ -8,6 +8,8 @@ import {RoomService} from '../../../../services/room.service';
 import {RoomModel} from '../../../../models/Room.model';
 import {ActivatedRoute} from '@angular/router';
 import {EstimationModel} from '../../../../models/Estimation.model';
+import {MatDialog} from '@angular/material/dialog';
+import {ShareRoomDialogComponent} from '../../components/dialog/share-room-dialog/share-room-dialog.component';
 
 @Component({
   selector: 'app-room',
@@ -23,21 +25,19 @@ export class RoomComponent implements OnInit {
   taskDone: boolean;
   room: RoomModel;
   splittedUsers: { below: GuestUserModel[]; left: GuestUserModel[]; above: GuestUserModel[]; right: GuestUserModel[] };
-  validUser = false;
 
   constructor(private guestUserService: GuestUserService,
               private taskService: TaskService,
               private roomService: RoomService,
+              public dialog: MatDialog,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loggedUser = this.guestUserService.loggedGuestUser;
-    if (!this.loggedUser) { return; }
-
     this.route.params.subscribe(params => {
       this.roomService.getByUUID(params.uuid).subscribe(room => {
-        this.validUser = this.loggedUser.roomId.toString() === room.id.toString();
         this.room = room;
+        this.loggedUser = this.guestUserService.loggedGuestUser(this.room.id);
+        if (!this.loggedUser) { return; }
         this.setupState();
         this.bindEvents();
       });
@@ -159,7 +159,17 @@ export class RoomComponent implements OnInit {
     this.bindRoomUpdated();
   }
 
+  guestUserLoggedIn(guestUser: GuestUserModel): void {
+    this.loggedUser = guestUser;
+    this.setupState();
+    this.bindEvents();
+  }
+
   resetEstimations(): void {
     this.taskService.invalidateEstimations(this.currentTask.id).subscribe();
+  }
+
+  openShareDialog(): void {
+    this.dialog.open(ShareRoomDialogComponent, { data: { roomUUID: this.room.uuid }, width: '400px' });
   }
 }

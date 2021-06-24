@@ -1,7 +1,9 @@
-<div *ngIf="!loggedUser"><div>YOU MUST BE LOGGED IN</div></div>
-<div *ngIf="loggedUser && !validUser"><span>YOU'RE NOT PART OF THIS ROOM</span></div>
+<div *ngIf="room && !loggedUser" class="guest-login-container">
+  <span class="join-room">{{'planning.home.join-room' | translate }}</span>
+  <app-guest-login class="guest-login" [roomId]="room.id" (loggedInEvent)="guestUserLoggedIn($event)"></app-guest-login>
+</div>
 
-<mat-sidenav-container autosize="true">
+<mat-sidenav-container *ngIf="loggedUser && room" autosize="true">
 
   <mat-sidenav #sidenav mode="over" class="sidenav">
     <mat-nav-list>
@@ -15,7 +17,7 @@
 
   <mat-sidenav-content class="sidenav-content">
 
-    <div *ngIf="loggedUser && validUser && room && splittedUsers">
+    <div *ngIf="splittedUsers">
       <h1>{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
       <h2 *ngIf="room.description">{{room.description}}</h2>
 
@@ -27,8 +29,13 @@
         </button>
 
         <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
-          <mat-icon aria-label="Side nav toggle icon">restart_alt</mat-icon>
+          <mat-icon aria-label="Reset icon">restart_alt</mat-icon>
           {{ 'planning.room.reset.button' | translate }}
+        </button>
+
+        <button mat-raised-button type="button" aria-label="Share room" (click)="openShareDialog()" color="primary" class="share-button">
+          <mat-icon aria-label="Share icon">share</mat-icon>
+          {{ 'planning.room.share.button' | translate }}
         </button>
       </div>
 

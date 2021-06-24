@@ -6,9 +6,6 @@
   "planning.home.name.mandatory": "Este campo es obligatorio.",
   "planning.home.name.min": "El nombre debe tener al menos 3 caracteres.",
   "planning.home.name.max": "El nombre no puede tener m+as de 20 caracteres.",
-  "planning.home.roomId": "ID de la Sala",
-  "planning.home.roomId.mandatory": "Este campo es obligatorio.",
-  "planning.home.roomId.min": "El ID de sala debe ser un numero positivo.",
   "planning.home.submit": "Unirse",
   "planning.home.title": "Practica Planning Poker con tus compañeros!",
   "planning.home.subtitle": "Podrás crear una sala, elegir tu baraja de cartas favorita y comenzar a estimar todas tus tareas",
@@ -38,5 +35,9 @@
   "planning.room.task.final-estimation": "Tarea estimada en: {{estimation}}",
   "planning.room.task-title.label": "Título",
   "planning.room.task-title.mandatory": "Este campo es obligatorio.",
-  "planning.room.create-task": "Crear tarea"
+  "planning.room.create-task": "Crear tarea",
+  "planning.room.share.button": "Compartir sala",
+  "planning.room.share.copy-button": "Copiar",
+  "planning.room.share.copy-title": "Copiar al portapapeles",
+  "planning.room.share.copied": "Copiado"
 }

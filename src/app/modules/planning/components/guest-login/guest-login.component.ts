@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GuestUserService} from '../../../../services/guest-user.service';
-import {Router} from '@angular/router';
+import {GuestUserModel} from '../../../../models/GuestUser.model';
 
 @Component({
   selector: 'app-guest-login',
@@ -11,17 +11,17 @@ import {Router} from '@angular/router';
 export class GuestLoginComponent implements OnInit {
 
   guestForm: FormGroup;
+  @Input() roomId: number;
+  @Output() loggedInEvent = new EventEmitter<GuestUserModel>();
 
   constructor(
     private formBuilder: FormBuilder,
     private guestUserService: GuestUserService,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.guestForm = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      roomId: [null, [Validators.required, Validators.min(1)]]
+      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
     });
   }
 
@@ -29,7 +29,8 @@ export class GuestLoginComponent implements OnInit {
     if (!this.guestForm.valid) {
       return;
     }
-    this.guestUserService.create(this.guestForm.value).subscribe(_ => this.router.navigateByUrl(`/room/${this.guestForm.value.roomId}`)
+    const guestUser: GuestUserModel = { roomId: this.roomId, name: this.guestForm.value.name };
+    this.guestUserService.create(guestUser).subscribe(_ => this.loggedInEvent.emit(guestUser)
       , error => console.error(error));
   }
 
