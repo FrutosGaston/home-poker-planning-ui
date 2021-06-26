@@ -18,25 +18,24 @@
   <mat-sidenav-content class="sidenav-content">
 
     <div *ngIf="splittedUsers">
-      <h1>{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
-      <h2 *ngIf="room.description">{{room.description}}</h2>
 
-      <div class="top-buttons-container">
-        <button mat-raised-button type="button" aria-label="Toggle sidenav" (click)="sidenav.toggle()"
-                color="primary" class="toggle-button">
-          <mat-icon aria-label="Side nav toggle icon">list</mat-icon>
-          {{ 'planning.room.taskList.button' | translate }}
-        </button>
+      <div class="room-top-container">
+        <div class="room-title-container">
+          <h1>{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
+          <h2 *ngIf="room.description">{{room.description}}</h2>
+        </div>
+        <div class="top-buttons-container">
+          <button mat-raised-button type="button" aria-label="Toggle sidenav" (click)="sidenav.toggle()"
+                  color="primary" class="toggle-button">
+            <mat-icon aria-label="Side nav toggle icon">list</mat-icon>
+            {{ 'planning.room.taskList.button' | translate }}
+          </button>
 
-        <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
-          <mat-icon aria-label="Reset icon">restart_alt</mat-icon>
-          {{ 'planning.room.reset.button' | translate }}
-        </button>
-
-        <button mat-raised-button type="button" aria-label="Share room" (click)="openShareDialog()" color="primary" class="share-button">
-          <mat-icon aria-label="Share icon">share</mat-icon>
-          {{ 'planning.room.share.button' | translate }}
-        </button>
+          <button mat-raised-button type="button" aria-label="Share room" (click)="openShareDialog()" color="primary" class="share-button">
+            <mat-icon aria-label="Share icon">share</mat-icon>
+            {{ 'planning.room.share.button' | translate }}
+          </button>
+        </div>
       </div>
 
       <div class="users-container horizontal above">
@@ -57,6 +56,13 @@
         <div class="desk">
           <div *ngIf="currentTask" class="task-title-container">
             <h3 class="task-title">{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
+
+            <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
+              <mat-icon aria-label="Reset icon">restart_alt</mat-icon>
+              {{ 'planning.room.reset.button' | translate }}
+            </button>
+
+
             <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>
 
             <app-estimation-form *ngIf="currentTask" class="final-estimation-form"

@@ -21,11 +21,11 @@ mat-sidenav-content {
   }
 
   &.above {
-    margin-bottom: 64px;
+    margin-bottom: 25px;
   }
 
   &.below {
-    margin-top: 64px;
+    margin-top: 25px;
   }
 
   &.left {
@@ -37,10 +37,6 @@ mat-sidenav-content {
     margin-right: -120px;
     margin-left: 32px;
   }
-}
-
-.toggle-button {
-  font-size: 24px;
 }
 
 .final-estimation-form {
@@ -78,7 +74,7 @@ mat-sidenav-content {
 .desk {
   background-color: lighten(mat-color($cyan), 40%);
   border-radius: 24px;
-  height: 350px;
+  height: 300px;
   width: 100%;
   max-width: 1000px;
   display: flex;
@@ -90,6 +86,22 @@ mat-sidenav-content {
 .top-buttons-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  button {
+    height: fit-content;
+    margin-left: 8px;
+    font-size: 18px;
+  }
+}
+
+.room-top-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.room-title-container {
+
 }
 
 mat-sidenav-container {

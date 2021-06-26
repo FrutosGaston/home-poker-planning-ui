@@ -5,7 +5,9 @@
   <ng-container *ngIf="estimation">
     <div [ngClass]="'estimation-card ' + positionToDesk" [@flipCard]="taskVotedByAll || taskDone || isCurrentUser" @slideUp>
       <strong class="card-value">{{estimation && estimation.card && estimation.card.value}}</strong>
-      <img class="card-back" src="assets/images/logo-hpp.svg" alt="estimation card back"/>
+      <div class="card-back">
+        <img class="card-back-logo" src="assets/images/logo-hpp.svg" alt="estimation card back"/>
+      </div>
     </div>
   </ng-container>
 

@@ -8,10 +8,10 @@
 
 @keyframes move-up {
   from { bottom: 0; }
-  to { bottom: 15px; }
+  to { bottom: 25px; }
 }
 @keyframes move-down {
-  from { bottom: 15px; }
+  from { bottom: 25px; }
   to { bottom: 0; }
 }
 
@@ -54,7 +54,7 @@
     &:hover {
       transform: scale(1.5);
       z-index: 99999;
-      bottom: 15px;
+      bottom: 25px;
       animation: move-up .2s;
     }
   }

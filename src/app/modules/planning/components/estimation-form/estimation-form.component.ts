@@ -14,17 +14,17 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   animations: [
     trigger('slideUp', [
       state('true', style({
-        transform: 'translateY(100%)'
+        transform: 'translateY(110%)'
       })),
       state('false', style({
         display: 'translateY(0%)'
       })),
       transition('true=>false', [
-        style({transform: 'translateY(100%)'}),
+        style({transform: 'translateY(110%)'}),
         animate('300ms ease-in', style({transform: 'translateY(0%)'}))
       ]),
       transition('false=>true', [
-        animate('300ms ease-in', style({transform: 'translateY(100%)'}))
+        animate('300ms ease-in', style({transform: 'translateY(110%)'}))
       ])
     ])
   ]

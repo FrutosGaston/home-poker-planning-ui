@@ -169,7 +169,7 @@ mat-sidenav {
   }
 
   .estimation-card {
-    border: 4px solid mat-color($cyan, 500);
+    border: 4px solid mat-color($cyan, 700);
     background-color: #212121 !important;
 
     .card-value {
@@ -184,7 +184,7 @@ mat-sidenav {
     background-color: white;
 
     .card-value {
-      color: mat-color($cyan, 500);
+      color: mat-color($cyan, 700);
     }
   }
 }

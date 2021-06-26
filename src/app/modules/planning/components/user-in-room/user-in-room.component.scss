@@ -11,12 +11,12 @@
   margin: 12px;
   width: 150px;
   min-width: 150px;
-  height: 100px;
+  height: 80px;
   border-radius: 12px;
 }
 
 .user-card mat-icon {
-  @include md-icon-size(80px);
+  @include md-icon-size(50px);
 }
 
 .user-name {
@@ -55,8 +55,8 @@
 
 
 .estimation-card {
-  width: 100px;
-  height: 136px;
+  width: 80px;
+  height: 109px;
   border-radius: 16px;
   position: absolute;
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 35%);
@@ -66,38 +66,44 @@
   transform-style: preserve-3d;
 
   &.above {
-    bottom: -150px;
+    bottom: -130px;
   }
 
   &.below {
-    top: -150px;
+    top: -130px;
   }
 
   &.left {
     right: -112px;
+    bottom: -2px;
   }
 
   &.right {
     left: -112px;
+    bottom: -2px;
   }
 
   .card-value {
-    font-size: 48px;
+    font-size: 36px;
     user-select: none;
     backface-visibility: hidden;
     transform: rotateY(180deg);
   }
 
   .card-back {
-    width: 92px;
-    height: 128px;
     background-color: #212121;
-    border-radius: 11px;
+    border-radius: 10px;
     user-select: none;
     backface-visibility: hidden;
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 103px;
+    width: 74px;
 
     img {
+      width: 74px;
     }
   }
 }
