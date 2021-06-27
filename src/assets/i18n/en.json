@@ -36,6 +36,7 @@
   "planning.room.task.final-estimation": "Estimated with: {{estimation}}",
   "planning.room.title": "You are in room: {{title}}",
   "planning.room.reset.button": "Restart estimations",
+  "planning.room.flip.button": "Flip cards",
   "planning.room.task-title.label": "Title",
   "planning.room.task-title.mandatory": "This field is mandatory.",
   "planning.room.create-task": "Create task",

@@ -17,7 +17,7 @@
 
   <mat-sidenav-content class="sidenav-content">
 
-    <div *ngIf="splittedUsers">
+    <div *ngIf="splittedUsers" class="room-content-container">
 
       <div class="room-top-container">
         <div class="room-title-container">
@@ -57,10 +57,17 @@
           <div *ngIf="currentTask" class="task-title-container">
             <h3 class="task-title">{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
 
-            <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
-              <mat-icon aria-label="Reset icon">restart_alt</mat-icon>
-              {{ 'planning.room.reset.button' | translate }}
-            </button>
+            <div class="desk-buttons">
+              <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
+                <mat-icon aria-label="Reset icon">restart_alt</mat-icon>
+                {{ 'planning.room.reset.button' | translate }}
+              </button>
+
+              <button mat-raised-button type="button" aria-label="Flip cards" (click)="flipCards()" color="primary" class="flip-button">
+                <mat-icon aria-label="Flip icon">flip</mat-icon>
+                {{ 'planning.room.flip.button' | translate }}
+              </button>
+            </div>
 
 
             <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>

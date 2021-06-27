@@ -1,5 +1,13 @@
 @import "src/styles.scss";
 
+.room-content-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 mat-sidenav-container {
   height: 100%;
 }
@@ -14,6 +22,8 @@ mat-sidenav-content {
 
   &.horizontal {
     flex-direction: row;
+    width: 90%;
+    max-width: 1200px;
   }
 
   &.vertical {
@@ -61,10 +71,22 @@ mat-sidenav-content {
   width: 80%;
 }
 
+.desk-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  .flip-button {
+    margin-left: 8px;
+  }
+}
+
 .task-title {
 }
 
 .desk-container {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,7 +98,7 @@ mat-sidenav-content {
   border-radius: 24px;
   height: 30vh;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,10 +120,6 @@ mat-sidenav-content {
 .room-top-container {
   display: flex;
   justify-content: space-between;
-}
-
-.room-title-container {
-
 }
 
 mat-sidenav-container {

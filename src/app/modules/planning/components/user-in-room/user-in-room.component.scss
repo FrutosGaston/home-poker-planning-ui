@@ -66,19 +66,21 @@
   transform-style: preserve-3d;
 
   &.above {
-    bottom: -150px;
+    bottom: -165px;
   }
 
   &.below {
-    top: -150px;
+    top: -165px;
   }
 
   &.left {
-    right: -112px;
+    right: -125px;
+    bottom: -8px;
   }
 
   &.right {
-    left: -112px;
+    left: -125px;
+    bottom: -8px;
   }
 
   .card-value {
@@ -115,8 +117,8 @@
 
     &.above { bottom: -130px; }
     &.below { top: -130px}
-    &.left { bottom: -2px; }
-    &.right { bottom: -2px; }
+    &.left { bottom: -2px; right: -100px; }
+    &.right { bottom: -2px; left: -100px; }
     .card-value { font-size: 36px; }
 
     .card-back {
@@ -142,8 +144,8 @@
 
     &.above { bottom: -110px; }
     &.below { top: -110px}
-    &.left { bottom: -15px; }
-    &.right { bottom: -15px; }
+    &.left { bottom: -15px; right: -85px; }
+    &.right { bottom: -15px; left: -85px; }
     .card-value { font-size: 34px; }
 
     .card-back {

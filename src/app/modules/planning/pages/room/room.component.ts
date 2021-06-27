@@ -172,4 +172,9 @@ export class RoomComponent implements OnInit {
   openShareDialog(): void {
     this.dialog.open(ShareRoomDialogComponent, { data: { roomUUID: this.room.uuid }, width: '400px' });
   }
+
+  flipCards(): void {
+    this.currentTask.flipCards = !this.currentTask.flipCards;
+    this.updateTaskState();
+  }
 }
