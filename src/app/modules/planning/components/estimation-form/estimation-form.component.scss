@@ -73,3 +73,22 @@
   }
 }
 
+@media (max-height: 1000px) {
+
+  .estimate-form {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    button { margin-left: 8px }
+  }
+
+  .estimation-carousel-container {
+
+    .estimation-card {
+      width: 70px;
+      height: 95px;
+      border-radius: 11px;
+    }
+  }
+}

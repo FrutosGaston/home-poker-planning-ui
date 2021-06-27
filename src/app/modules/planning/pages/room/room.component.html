@@ -21,8 +21,8 @@
 
       <div class="room-top-container">
         <div class="room-title-container">
-          <h1>{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
-          <h2 *ngIf="room.description">{{room.description}}</h2>
+          <h1 class="room-title">{{'planning.room.title' | translate:{ title: this.room.title } }}</h1>
+          <h2 class="room-description" *ngIf="room.description">{{room.description}}</h2>
         </div>
         <div class="top-buttons-container">
           <button mat-raised-button type="button" aria-label="Toggle sidenav" (click)="sidenav.toggle()"
@@ -65,7 +65,7 @@
 
             <span *ngIf="currentTask.estimation && currentTask.estimation.card">{{'planning.room.task.final-estimation' | translate:{ estimation: currentTask.estimation.card.value } }}</span>
 
-            <app-estimation-form *ngIf="currentTask" class="final-estimation-form"
+            <app-estimation-form *ngIf="currentTask && false" class="final-estimation-form"
                                  isFinal="true"
                                  [deckId]="room.deckId"
                                  [guestUserId]="loggedUser.id"

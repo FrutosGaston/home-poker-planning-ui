@@ -21,11 +21,11 @@ mat-sidenav-content {
   }
 
   &.above {
-    margin-bottom: 25px;
+    margin-bottom: 64px;
   }
 
   &.below {
-    margin-top: 25px;
+    margin-top: 64px;
   }
 
   &.left {
@@ -74,7 +74,7 @@ mat-sidenav-content {
 .desk {
   background-color: lighten(mat-color($cyan), 40%);
   border-radius: 24px;
-  height: 300px;
+  height: 30vh;
   width: 100%;
   max-width: 1000px;
   display: flex;
@@ -125,4 +125,20 @@ mat-sidenav-container {
   margin-bottom: 8px;
   font-size: 32px;
   color: mat-color($primary);
+}
+
+@media (max-height: 1200px) {
+  .users-container {
+    &.above { margin-bottom: 25px; }
+    &.below { margin-top: 25px; }
+  }
+
+  .room-title {
+    font-size: 30px;
+    margin: 4px 0 0;
+  }
+  .room-description {
+    font-size: 18px;
+    margin: 2px 0;
+  }
 }
