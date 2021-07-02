@@ -97,7 +97,7 @@
       </div>
     </div>
 
-    <app-estimation-form *ngIf="currentTask"
+    <app-estimation-form *ngIf="currentTask && !loggedUser.spectator"
                          [show]="taskVotedByAll || taskDone"
                          [deckId]="room.deckId"
                          [guestUserId]="loggedUser.id"

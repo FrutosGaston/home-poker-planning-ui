@@ -21,7 +21,8 @@ export class GuestLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.guestForm = this.formBuilder.group({
-      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]]
+      name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      spectator: [null, []]
     });
   }
 
@@ -29,7 +30,8 @@ export class GuestLoginComponent implements OnInit {
     if (!this.guestForm.valid) {
       return;
     }
-    const guestUser: GuestUserModel = { roomId: this.roomId, name: this.guestForm.value.name };
+    const formValue = this.guestForm.value;
+    const guestUser: GuestUserModel = { roomId: this.roomId, name: formValue.name, spectator: formValue.spectator };
     this.guestUserService.create(guestUser).subscribe(_ => this.loggedInEvent.emit(guestUser)
       , error => console.error(error));
   }

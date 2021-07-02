@@ -6,6 +6,7 @@
   "planning.home.name.mandatory": "Este campo es obligatorio.",
   "planning.home.name.min": "El nombre debe tener al menos 3 caracteres.",
   "planning.home.name.max": "El nombre no puede tener m+as de 20 caracteres.",
+  "planning.home.spectator": "Espectador (no podrás puntuar)",
   "planning.home.submit": "Unirse",
   "planning.home.title": "Practica Planning Poker con tus compañeros!",
   "planning.home.subtitle": "Podrás crear una sala, elegir tu baraja de cartas favorita y comenzar a estimar todas tus tareas",

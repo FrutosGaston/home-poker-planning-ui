@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form-container">
-    <form [formGroup]="guestForm" (submit)="submit()">
+    <form class="login-form" [formGroup]="guestForm" (submit)="submit()">
       <mat-form-field class="form-field" appearance="outline">
         <mat-label>{{ 'planning.home.name' | translate }}</mat-label>
         <input matInput formControlName="name" required autocomplete="off">
@@ -10,6 +10,7 @@
           <span *ngIf="guestForm.controls.name.errors.maxlength">{{ 'planning.home.name.max' | translate }}</span>
         </mat-error>
       </mat-form-field>
+      <mat-checkbox formControlName="spectator" class="spectator-checkbox">{{ 'planning.home.spectator' | translate }}</mat-checkbox>
       <button mat-raised-button color="primary" type="submit">{{ 'planning.home.submit' | translate }}</button>
     </form>
   </div>

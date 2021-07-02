@@ -8,7 +8,6 @@ export class TaskModel {
   estimation?: EstimationModel;
   estimations?: EstimationModel[];
   createdAt?: Date;
-  flipCards = false;
 
   constructor(task: any) {
     this.id = task.id;
@@ -28,6 +27,6 @@ export class TaskModel {
   }
 
   done(): boolean {
-    return !!this.estimation || this.flipCards;
+    return !!this.estimation;
   }
 }

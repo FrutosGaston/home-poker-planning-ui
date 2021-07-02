@@ -6,3 +6,14 @@
 .form-field {
   display: block
 }
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.spectator-checkbox {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}

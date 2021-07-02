@@ -70,7 +70,7 @@ export class RoomComponent implements OnInit {
   private updateTaskState(): void {
     if (!this.currentTask) { return; }
     this.taskDone = this.currentTask.done();
-    this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom);
+    this.taskVotedByAll = this.currentTask.votedByAll(this.usersInRoom.filter(user => !user.spectator));
   }
 
   private setCurrentTask(): void {
