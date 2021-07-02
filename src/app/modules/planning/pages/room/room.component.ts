@@ -135,6 +135,7 @@ export class RoomComponent implements OnInit {
       const taskIndex = this.tasks.findIndex(task => task.id === updatedTask.id);
       const taskToUpdate = this.tasks[taskIndex];
       taskToUpdate.estimations = updatedTask.estimations;
+      taskToUpdate.estimation = updatedTask.estimation;
       this.updateTaskState();
     });
   }
@@ -174,7 +175,10 @@ export class RoomComponent implements OnInit {
   }
 
   flipCards(): void {
-    this.currentTask.flipCards = !this.currentTask.flipCards;
-    this.updateTaskState();
+    const estimation = new EstimationModel();
+    estimation.guestUserId = this.loggedUser.id;
+    estimation.taskId = this.currentTask.id;
+    estimation.cardId = 10;
+    this.taskService.estimateFinal(estimation).subscribe();
   }
 }

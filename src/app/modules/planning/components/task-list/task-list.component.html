@@ -2,7 +2,7 @@
   <a mat-list-item *ngFor="let task of tasks" (click)="taskSelected($event, task); sidenav.close()"
      class="task-list-element {{task.id == currentTask.id ? 'selected-task-list' : ''}}">
     <span>{{task.title}}</span>
-    <ng-container *ngIf="task.estimation && task.estimation.card">
+    <ng-container *ngIf="task.estimation && task.estimation.card && currentTask.estimation.card.id !== 10">
       <div class="done-icon task-list-icon">{{task.estimation.card.value}}</div>
     </ng-container>
   </a>
