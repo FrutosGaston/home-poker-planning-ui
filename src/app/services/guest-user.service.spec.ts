@@ -16,7 +16,7 @@ beforeEach(() => {
 it('should return expected guest users (HttpClient called once)', () => {
   const roomId = 1;
   const expectedGuestUsers: GuestUserModel[] =
-    [{ id: 1, name: 'A', roomId }, { id: 2, name: 'B', roomId }];
+    [{ id: 1, spectator: false, name: 'A', roomId }, { id: 2, spectator: false, name: 'B', roomId }];
 
   httpClientSpy.get.and.returnValue(of(expectedGuestUsers));
 
@@ -42,7 +42,7 @@ it('should return an error when the server returns a 404', () => {
 
 it('should return new id', () => {
   const guestUserId = 1;
-  const guestUser: GuestUserModel = { name: 'A', roomId: 1 };
+  const guestUser: GuestUserModel = { name: 'A', spectator: false, roomId: 1 };
 
   httpClientSpy.post.and.returnValue(of(guestUserId));
 
@@ -54,7 +54,7 @@ it('should return new id', () => {
 it('should return logged user', () => {
   const guestUserId = 1;
   const roomId = 1;
-  const guestUser: GuestUserModel = { name: 'A', roomId };
+  const guestUser: GuestUserModel = { name: 'A', spectator: false, roomId };
 
   httpClientSpy.post.and.returnValue(of(guestUserId));
   guestUserService.create(guestUser).subscribe(_ => _);

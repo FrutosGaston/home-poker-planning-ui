@@ -105,6 +105,7 @@
 
     img {
       width: 74px;
+      backface-visibility: hidden;
     }
   }
 }
