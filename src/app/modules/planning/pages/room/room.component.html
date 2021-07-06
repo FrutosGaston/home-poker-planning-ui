@@ -97,8 +97,12 @@
       </div>
     </div>
 
+    <div *ngIf="taskVotedByAll || taskDone" class="metrics-container">
+      <app-estimation-metrics [estimations]="currentTask.estimations"></app-estimation-metrics>
+    </div>
+
     <app-estimation-form *ngIf="currentTask && !loggedUser.spectator"
-                         [show]="taskVotedByAll || taskDone"
+                         [hidden]="taskVotedByAll || taskDone"
                          [deckId]="room.deckId"
                          [guestUserId]="loggedUser.id"
                          [taskId]="currentTask.id">

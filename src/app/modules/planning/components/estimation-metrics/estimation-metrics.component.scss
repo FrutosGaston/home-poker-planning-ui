@@ -1,0 +1,61 @@
+@import "src/styles.scss";
+
+.estimation-card {
+  padding: 0;
+  width: 50px;
+  height: 68px;
+  border-radius: 10px;
+  margin: 4px;
+  box-shadow: 0 0 8px 0 rgb(0 0 0 / 25%);
+  border-width: 3px;
+  bottom: 0;
+}
+
+.card-value {
+  font-size: 28px;
+}
+
+.estimation-card-content {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.metrics-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+}
+
+.metric {
+  display: flex;
+}
+
+.metric-votes {
+  margin-top: 12px;
+}
+
+.metric-stats-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-percentage {
+  margin-top: 8px;
+  position: relative;
+  width: 100px;
+
+  .percentage-bar {
+    position: absolute;
+    background-color: mat-color($primary, 500);
+    height: 6px;
+    border-radius: 10px;
+    margin-right: 4px;
+  }
+}

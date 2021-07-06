@@ -1,0 +1,16 @@
+<div class="metrics-container">
+  <div class="metric" *ngFor="let metric of metrics">
+    <mat-card class="estimation-card">
+      <div class="estimation-card-content">
+        <strong class="card-value">{{metric.value}}</strong>
+      </div>
+    </mat-card>
+    <div class="metric-stats-container">
+      <div class="metric-percentage">
+        {{metric.percentage | percent : '1.0-0'}}
+        <div class="percentage-bar" [ngStyle]="{'width': metric.percentage * 100 + '%'}"></div>
+      </div>
+      <strong class="metric-votes">{{'planning.room.metrics.votes' | translate:{ votes: metric.votes } }}</strong>
+    </div>
+  </div>
+</div>

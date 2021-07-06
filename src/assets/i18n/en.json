@@ -41,5 +41,6 @@
   "planning.room.share.button": "Share room",
   "planning.room.share.copy-button": "Copy",
   "planning.room.share.copy-title": "Copy to Clipboard",
-  "planning.room.share.copied": "Copied"
+  "planning.room.share.copied": "Copied",
+  "planning.room.metrics.votes": "{{votes}} votes"
 }

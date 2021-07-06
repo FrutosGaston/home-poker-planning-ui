@@ -36,6 +36,7 @@ import { UserInRoomComponent } from './modules/planning/components/user-in-room/
 import { ShareRoomDialogComponent } from './modules/planning/components/dialog/share-room-dialog/share-room-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EstimationMetricsComponent } from './modules/planning/components/estimation-metrics/estimation-metrics.component';
 
 const routes: Routes = [
   { path: '', component: PlanningHomeComponent },
@@ -55,7 +56,8 @@ const routes: Routes = [
     EstimationFormComponent,
     TaskListComponent,
     UserInRoomComponent,
-    ShareRoomDialogComponent
+    ShareRoomDialogComponent,
+    EstimationMetricsComponent
   ],
   imports: [
     BrowserModule,

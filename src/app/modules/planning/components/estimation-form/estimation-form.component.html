@@ -15,7 +15,7 @@
 </form>
 </ng-container>
 
-<div *ngIf="!isFinal" class="estimation-carousel-container" [@slideUp]="show" [hidden]="show">
+<div *ngIf="!isFinal" class="estimation-carousel-container" [@slideUp]="hidden" [hidden]="hidden">
   <span class="choose-a-card">{{ 'planning.room.choose-a-card' | translate }}</span>
   <div class="estimation-carousel">
     <mat-card (click)="cardSelected(card)" *ngFor="let card of deck && deck.cards" drag-scroll-item class="estimation-card">

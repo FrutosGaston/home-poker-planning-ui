@@ -35,7 +35,7 @@ export class EstimationFormComponent implements OnInit {
   @Input() guestUserId: number;
   @Input() deckId: number;
   @Input() isFinal: boolean;
-  @Input() show = true;
+  @Input() hidden = true;
 
   // tslint:disable-next-line:variable-name
   _taskId: number;

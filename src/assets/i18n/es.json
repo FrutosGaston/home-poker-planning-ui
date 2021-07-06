@@ -41,5 +41,6 @@
   "planning.room.share.button": "Compartir sala",
   "planning.room.share.copy-button": "Copiar",
   "planning.room.share.copy-title": "Copiar al portapapeles",
-  "planning.room.share.copied": "Copiado"
+  "planning.room.share.copied": "Copiado",
+  "planning.room.metrics.votes": "{{votes}} votos"
 }
