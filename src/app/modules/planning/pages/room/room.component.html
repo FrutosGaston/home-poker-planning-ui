@@ -55,7 +55,7 @@
 
         <div class="desk">
           <div *ngIf="currentTask" class="task-title-container">
-            <h3 class="task-title">{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
+            <h3 *ngIf="currentTask.title !== room.title" class="task-title">{{'planning.room.task.title' | translate:{ title: currentTask.title } }}</h3>
 
             <div class="desk-buttons">
               <button mat-raised-button type="button" aria-label="Reset estimations" (click)="resetEstimations()" color="primary" class="reset-button">
