@@ -29,6 +29,7 @@ export class ShareRoomDialogComponent implements OnInit {
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
     this.snackBar.open(this.translateService.instant('planning.room.share.copied') + ' ✅', '', {
+      duration: 1500,
       horizontalPosition: 'center',
       verticalPosition: 'top',
       panelClass: ['ok-snackbar']
