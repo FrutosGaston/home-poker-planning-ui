@@ -1,4 +1,4 @@
-<div class="metrics-container">
+<div *ngIf="metrics && metrics.length" class="metrics-container">
   <span class="round-results">{{'planning.room.metrics.title' | translate }}</span>
   <div class="metric" *ngFor="let metric of metrics">
     <mat-card class="estimation-card">
