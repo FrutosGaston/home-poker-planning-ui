@@ -1,6 +1,7 @@
 <ng-container>
-  <button mat-icon-button class="translate-icon" aria-label="Translate icon" [matMenuTriggerFor]="menu">
+  <button mat-button class="translate-button" aria-label="Translate button" [matMenuTriggerFor]="menu">
     <mat-icon>translate</mat-icon>
+    {{ 'language' | translate }}
   </button>
 
   <mat-menu #menu="matMenu">

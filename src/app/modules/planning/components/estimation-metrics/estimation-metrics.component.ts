@@ -44,7 +44,7 @@ export class EstimationMetricsComponent implements OnInit {
 
     const newMetrics = [];
     const countt = this.estimations
-      .map(estimation => estimation.card.value)
+      .map(estimation => estimation.card && estimation.card.value)
       .reduce(EstimationMetricsComponent.countByValue, new Map());
     countt.forEach((count, cardValue) => {
         const percentage = count / this.estimations.length;

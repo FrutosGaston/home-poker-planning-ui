@@ -1,14 +1,17 @@
 <div class="mat-app-background">
   <mat-toolbar color="primary">
-    <a class="logo-container" routerLink="/"><img class="logo" src="assets/images/logo-hpp.svg"></a>
+    <a class="logo-container" routerLink="/"><img class="logo" src="assets/images/logo-hpp.svg" alt="app logo"></a>
     <span class="title">Home Planning Poker</span>
     <span class="spacer"></span>
     <app-translation></app-translation>
-    |
-    <mat-icon class="mr-8">brightness_5</mat-icon>
-    <mat-slide-toggle [formControl]="darkModeToggleControl" class="mr-8">
-    </mat-slide-toggle>
-    <mat-icon>bedtime</mat-icon>
+    <div class="separator"></div>
+    <div class="dark-mode-toggle-container">
+      <div class="dark-mode-toggle-title">{{ 'dark-mode' | translate }}</div>
+      <mat-icon class="mr-8">light_mode</mat-icon>
+      <mat-slide-toggle [formControl]="darkModeToggleControl" class="mr-8">
+      </mat-slide-toggle>
+      <mat-icon>dark_mode</mat-icon>
+    </div>
   </mat-toolbar>
 
 

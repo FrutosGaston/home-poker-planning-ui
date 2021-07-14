@@ -55,12 +55,10 @@ body {
   font-feature-settings: 'liga';
 }
 
-body {
-  margin: 0;
-}
-
-.mat-menu-item:hover, .task-list-element:hover {
-  background: mat-color($accent, lighter) !important;
+.light-mode {
+  .mat-menu-item:hover, .task-list-element:hover {
+    background: mat-color($accent, lighter) !important;
+  }
 }
 
 .dark-mode {
@@ -80,7 +78,7 @@ button.active, .selected-task-list {
 
 .dark-mode {
   button.active, .selected-task-list {
-    background: mat-color($accent, 800) !important;
+    background: mat-color($accent, 900) !important;
   }
 }
 

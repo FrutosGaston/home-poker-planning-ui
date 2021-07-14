@@ -2,6 +2,13 @@
   flex: 1 1 auto;
 }
 
+.separator {
+  height: 50%;
+  width: 2px;
+  margin-right: 8px;
+  background-color: white;
+}
+
 .logo-container {
   display: flex;
   justify-content: center;
@@ -32,3 +39,17 @@
   font-weight: bold;
 }
 
+.dark-mode-toggle-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .dark-mode-toggle-title {
+    font-size: 14px;
+    margin-right: 3px;
+  }
+
+  mat-icon {
+    margin: 0 2px;
+  }
+}

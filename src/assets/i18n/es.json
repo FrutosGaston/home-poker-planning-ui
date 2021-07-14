@@ -1,4 +1,6 @@
 {
+  "dark-mode": "Modo Oscuro",
+  "language": "Idioma",
   "language.select": "Seleccionar lenguage",
   "language.spanish": "Español",
   "language.english": "English",
@@ -42,5 +44,6 @@
   "planning.room.share.copy-button": "Copiar",
   "planning.room.share.copy-title": "Copiar al portapapeles",
   "planning.room.share.copied": "Copiado",
+  "planning.room.metrics.title": "Resultados de la ronda:",
   "planning.room.metrics.votes": "{{votes}} votos"
 }

@@ -63,7 +63,7 @@
                 {{ 'planning.room.reset.button' | translate }}
               </button>
 
-              <button *ngIf="!currentTask.done()" (click)="flipCards()" mat-raised-button type="button" aria-label="Flip cards" color="primary" class="flip-button">
+              <button *ngIf="!taskDone && !taskVotedByAll" (click)="flipCards()" mat-raised-button type="button" aria-label="Flip cards" color="primary" class="flip-button">
                 <mat-icon aria-label="Flip icon">flip</mat-icon>
                 {{ 'planning.room.flip.button' | translate }}
               </button>
