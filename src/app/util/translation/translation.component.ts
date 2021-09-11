@@ -9,7 +9,7 @@ const STORAGE_KEY = 'activeLang';
   styleUrls: ['./translation.component.scss']
 })
 export class TranslationComponent implements OnInit {
-  public activeLang = localStorage.getItem(STORAGE_KEY) || 'es';
+  public activeLang = localStorage.getItem(STORAGE_KEY) || 'en';
 
   constructor(
     private translate: TranslateService
