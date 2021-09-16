@@ -22,7 +22,7 @@ export class GuestUserService {
     return this.http.post<number>(`${this.baseURL}`, body, { headers })
       .pipe(take(1), tap(id => {
         guestUser.id = id;
-        sessionStorage.setItem(`usr-${guestUser.roomId}`, JSON.stringify(guestUser));
+        localStorage.setItem(`usr-${guestUser.roomId}`, JSON.stringify(guestUser));
       }));
   }
 
@@ -36,7 +36,7 @@ export class GuestUserService {
   }
 
   loggedGuestUser(roomId: number): GuestUserModel {
-    return JSON.parse(sessionStorage.getItem(`usr-${roomId}`));
+    return JSON.parse(localStorage.getItem(`usr-${roomId}`));
   }
 
 }
