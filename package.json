@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
-    "heroku-start": "set NODE_OPTIONS=--openssl-legacy-provider && node server.js",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && ng serve",
+    "heroku-start": "export NODE_OPTIONS=--openssl-legacy-provider && node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "heroku-preinstall": "npm install -g @angular/cli @angular/compiler-cli typescript",
-    "heroku-postbuild": "ng build --aot --prod --configuration=production"
+    "heroku-postbuild": "export NODE_OPTIONS=--openssl-legacy-provider && ng build --aot --prod --configuration=production"
   },
   "engines": {
     "node": "20.x",
@@ -36,6 +36,7 @@
     "material-design-icons": "^3.0.1",
     "ngx-drag-scroll": "11.0.0-beta.1",
     "path": "^0.12.7",
+    "postcss": "8.2.15",
     "rxjs": "~6.6.0",
     "sockjs-client": "^1.5.1",
     "tslib": "^2.0.0",
